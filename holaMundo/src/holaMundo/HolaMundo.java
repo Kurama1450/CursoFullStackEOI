@@ -39,6 +39,15 @@ public class HolaMundo {
 		int maxINT = Integer.MAX_VALUE; // 2147483647
 		int minINT = Integer.MIN_VALUE; // -2147483648
 		System.out.println("El resultado de la suma es: " + (maxINT+minINT));
+		long larg = 2000000000;
+		long larg2 = 1000000000;
+		System.out.println("La suma de dos largos bien hecho es: " + (larg+larg2));
+		char letraA = 'a';
+		char letraB = 'b';
+		System.out.println("La suma de la letra A y la letra B es: " + letraA+letraB);
+		System.out.println("La suma de la letra A y la letra B es: " + (letraA+letraB));
+		System.out.println("La suma de la letra A y la letra B es: " + (letraA+3)); //100
+		System.out.println("La suma de la letra A y la letra B es: " + (char)(letraA+3));
 
 	}
 	
