@@ -35,6 +35,10 @@ public class HolaMundo {
 		System.out.println("El resultado de la suma decimal es: "+ (num3+num4));
 		System.out.println("El resultado de la división es: "+ (num3/num4));
 		
+		// Enteros largos
+		int maxINT = Integer.MAX_VALUE; // 2147483647
+		int minINT = Integer.MIN_VALUE; // -2147483648
+		System.out.println("El resultado de la suma es: " + (maxINT+minINT));
 
 	}
 	
