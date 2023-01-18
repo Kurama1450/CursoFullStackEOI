@@ -130,7 +130,10 @@ public class HolaMundo {
                 encodedText.append((char) ascii);
             } else {
                 encodedText.append(c);
-            }}
+            }
+        }
+
+        System.out.println("Texto codificado: " + encodedText.toString());
 		
 	}
 	
@@ -139,6 +142,8 @@ public class HolaMundo {
 		ejemplosTipos();
 		ejemplosString();
 		ejemplosBoolean();
+		algoritmoCesar();
+		tablasVerdad();
 	}
 
 }
