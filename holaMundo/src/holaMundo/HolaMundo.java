@@ -1,5 +1,7 @@
 package holaMundo;
 
+import java.util.Scanner;
+
 /**
  * 
  * @author nesto
@@ -66,6 +68,8 @@ public class HolaMundo {
 	}
 	
 	public static void ejemplosBoolean() {
+		int numero1 = 10;
+		int numero2 = 20;
 		boolean boll1 = true;
 		boolean boll2 = false;
 		boolean compar1 = 10<18;
@@ -80,12 +84,53 @@ public class HolaMundo {
 		System.out.println(cad1.equals(cad3)); //true
 		System.out.println(cad1.equals(cad4)); //false
 		System.out.println(cad2.equals(cad4)); //true
-		
+		numero1 = 5;
+		double numero3 = 5.0;
+		double numero4 = 5.1;
+		System.out.println(numero1==numero3); // true o false? -> true
+		System.out.println(numero1==numero4); // true o false? -> false
+		System.out.println((11/2)==numero1); // true o false? -> true
+		System.out.println((11.0/2)==numero1); // true o false? -> false
+		System.out.println((11%2)==1); // true o false? -> true
+		System.out.println((11%2)==0); // true o false? -> false
+		System.out.println(23%4); // el resto de la división es 3
 	}
 	
-	
+	public static void tablasVerdad() {
+		int edad = 25;
+		int anyosCarnet = 6;
+		String sexo = "Masculino";
+		String nombre = "Pepe";
+		boolean esPepeMayor = edad >= 18 && nombre.equals("Pepe");  // true
+		System.out.println(esPepeMayor); // true
+									//    true             &&   false  -> false
+		boolean tieneDescuento = (sexo.equals("Masculino") && anyosCarnet > 10) || 
+				(sexo.equals("Femenino") && anyosCarnet > 5); // false || false
+		System.out.println(tieneDescuento); // false
+		
+		boolean estoQueDa = sexo.equals("Masculino") || anyosCarnet>5 && nombre.equals("Fran");
+		System.out.println(estoQueDa); // true
+		int numero = 7+4*5; // 27
+	}
 	
 	public static void algoritmoCesar() {
+		
+		Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Ingresa el texto a codificar: ");
+        String text = scanner.nextLine();
+        System.out.print("Ingresa el desplazamiento: ");
+        int shift = scanner.nextInt();
+
+        StringBuilder encodedText = new StringBuilder();
+        for (char c : text.toCharArray()) {
+            if (Character.isLetter(c)) {
+                int ascii = (int) c;
+                ascii += shift;
+                encodedText.append((char) ascii);
+            } else {
+                encodedText.append(c);
+            }}
 		
 	}
 	
