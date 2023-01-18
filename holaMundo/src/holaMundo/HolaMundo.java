@@ -72,7 +72,18 @@ public class HolaMundo {
 		System.out.println(10<20);
 		System.out.println(compar1);
 		// Condiciones de comparación <,>,<=,>=,==,!=,<>
+		String cad1 = "Buenas";
+		String cad2 = "Dias";
+		String cad3 = "Buenas";
+		String cad4 = "Dias";
+		System.out.println(cad1.equals(cad2)); //false
+		System.out.println(cad1.equals(cad3)); //true
+		System.out.println(cad1.equals(cad4)); //false
+		System.out.println(cad2.equals(cad4)); //true
+		
 	}
+	
+	
 	
 	public static void algoritmoCesar() {
 		
