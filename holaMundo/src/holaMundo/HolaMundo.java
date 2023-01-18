@@ -1,7 +1,4 @@
 package holaMundo;
-
-import java.util.Scanner;
-
 /**
  * 
  * @author nesto
@@ -113,28 +110,33 @@ public class HolaMundo {
 		int numero = 7+4*5; // 27
 	}
 	
-	public static void algoritmoCesar() {
+	public static void ejemplosIncrementosDecrementos() {
+		int numero = 10;
+		// pre-incremento
+		++numero;  // 11
+		System.out.println(numero);  // 11
+		// post-incremento
+		numero++;  // 12
+		System.out.println(numero);  // 12
+		// pre-decremento
+		--numero;  // 11
+		System.out.println(numero);  // 11
+		// post-decremento
+		numero--;  // 10
+		System.out.println(numero);  // 10
 		
-		Scanner scanner = new Scanner(System.in);
-
-        System.out.print("Ingresa el texto a codificar: ");
-        String text = scanner.nextLine();
-        System.out.print("Ingresa el desplazamiento: ");
-        int shift = scanner.nextInt();
-
-        StringBuilder encodedText = new StringBuilder();
-        for (char c : text.toCharArray()) {
-            if (Character.isLetter(c)) {
-                int ascii = (int) c;
-                ascii += shift;
-                encodedText.append((char) ascii);
-            } else {
-                encodedText.append(c);
-            }
-        }
-
-        System.out.println("Texto codificado: " + encodedText.toString());
+		//// LO IMPORTANTE ES EL MOMENTO EN QUE INCREMENTA O DECREMENTA
+		System.out.println(++numero);  // 10 u 11 ? -> 11 y número = 11
+		System.out.println(numero++);  // 11 y número = 12
+		System.out.println(numero);  // 12
 		
+		//System.out.println(++numero+numero++); // 26 (13 + 13) y luego numero=14  // a+b = b+a
+		System.out.println(numero+++ ++numero); // 26 (13+13) y luego numero=14  // a+b = b+a
+		System.out.println(numero);  // 14
+		int numero2 = ++numero;  // numero2 = 15; numero = 15;
+		System.out.println("numero2 = " + numero2 + " numero = " + numero);
+		int numero3 = numero++;  // numero3 = 15; numero = 16;
+		System.out.println("numero2 = " + numero3 + " numero = " + numero);
 	}
 	
 	public static void main(String[] args) {
@@ -142,7 +144,6 @@ public class HolaMundo {
 		ejemplosTipos();
 		ejemplosString();
 		ejemplosBoolean();
-		algoritmoCesar();
 		tablasVerdad();
 	}
 
