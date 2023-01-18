@@ -139,12 +139,27 @@ public class HolaMundo {
 		System.out.println("numero2 = " + numero3 + " numero = " + numero);
 	}
 	
+	public static void ejemplosConstantes() {
+		final double IVA = 0.21;
+		double precio = 50;
+		System.out.println("El precio final es: " +(precio * (1+IVA)));
+	}
+	
+	public static void conversionesNumerosCadenas() {
+		int num = 10;
+		String cadena = "11";
+		// Cadena a numero
+		System.out.println(Integer.parseInt(cadena) + num);
+	}
+	
 	public static void main(String[] args) {
 		ejemplosComentarios();
 		ejemplosTipos();
 		ejemplosString();
 		ejemplosBoolean();
 		tablasVerdad();
+		ejemplosConstantes();
+		conversionesNumerosCadenas();
 	}
 
 }
