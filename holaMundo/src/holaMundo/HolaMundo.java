@@ -51,9 +51,38 @@ public class HolaMundo {
 
 	}
 	
+	public static void ejemplosString() {
+		String cadena1;
+		cadena1 = "Néstor";
+		String cadena2 = "Costa" , cadena3 = "Orts";
+		String cadena4 = cadena1 + " " + cadena2 + " " + cadena3;
+		String prefijo = "34";
+		String telefono = "6666666666";
+		int numero = 40;
+		System.out.println(cadena4);
+		System.out.println(prefijo + "-" + telefono);
+		System.out.printf("%s tiene %d años",cadena1,numero);
+		System.out.println();
+	}
+	
+	public static void ejemplosBoolean() {
+		boolean boll1 = true;
+		boolean boll2 = false;
+		boolean compar1 = 10<18;
+		System.out.println(10<20);
+		System.out.println(compar1);
+		// Condiciones de comparación <,>,<=,>=,==,!=,<>
+	}
+	
+	public static void algoritmoCesar() {
+		
+	}
+	
 	public static void main(String[] args) {
 		ejemplosComentarios();
 		ejemplosTipos();
+		ejemplosString();
+		ejemplosBoolean();
 	}
 
 }
