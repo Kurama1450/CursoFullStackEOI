@@ -5,7 +5,7 @@ public class ejercicio6 {
 	public static void main(String[] args) {
 		int numA = 13, numB = 9 , numC = 5 , numD = 3;
 
-		final int AUXB = numB;
+		final int AUXB = numB;//Constante para mantener el valor original de numB.
 		
 		System.out.println("Valores iniciales: " + "A: " + numA + " B: " + numB + " C: " + numC + " D: " + numD);
 		numB = numC;
