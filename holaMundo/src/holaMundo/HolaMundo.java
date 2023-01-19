@@ -1,4 +1,7 @@
 package holaMundo;
+
+import java.util.Scanner;
+
 /**
  * 
  * @author nesto
@@ -152,14 +155,73 @@ public class HolaMundo {
 		System.out.println(Integer.parseInt(cadena) + num);
 	}
 	
+	public static void ejemplosSaltos() {
+		System.out.println("Hola\nNéstor\nBien?");// n salto de linea
+		System.out.println("Hola\n\tNéstor\nBien?");// t tabulacion
+		System.out.println("Elige una opción: ");
+		System.out.println("\t1) Añadir producto:");
+		System.out.println("\t2) Borrar producto:");
+	}
+	
+	public static void ejemplosFormateos() {
+		String fran = "Fran";
+		String consuelo = "Consuelo";
+		double salario1 = 95567.89;
+		double salario2 = 2589.3674;
+		System.out.printf("%-12s%14s\n","Nombre","Salario");//% con un numero da los espacios que deseamos , s una cadena
+		System.out.println("--------------------------");
+		System.out.printf("%-12s%14.2f€\n",fran,salario1);// la f es numero con decimales y d numero sin decimales
+		System.out.printf("%-12s%14.2f€\n",consuelo,salario2);
+	}
+	
+	public static void ejemplosScanner() { // Leer de la consola
+		Scanner sc = new Scanner(System.in); // Abro el Scanner
+		
+		System.out.println("Introduzca su nombre: ");
+		String nombre = sc.nextLine();//Coger lo que escribe el usuario
+		System.out.println("Introduzca su localidad: ");
+		String localidad = sc.nextLine();
+		System.out.println("Introduzca su sueldo: ");
+		double salario = sc.nextDouble();
+		sc.nextLine();//Limpiar el buffer
+		System.out.println("Introduzca cuanto desearia ganar: ");
+		double salarioDeseado = sc.nextDouble();
+		sc.nextLine();
+		System.out.println("Hola " + nombre + " de " + localidad + " tu salario es de " + salario + " y deseando ganar " + salarioDeseado);
+		
+		sc.close();// Cerrar el Scanner
+	}
+	
+	public static void ejemplosScanner2() { // Leer de la consola
+		Scanner sc = new Scanner(System.in); // Abro el Scanner
+		
+		System.out.println("Introduzca su nombre: ");
+		String nombre = sc.nextLine();//Coger lo que escribe el usuario
+		System.out.println("Introduzca su localidad: ");
+		String localidad = sc.nextLine();
+		System.out.println("Introduzca su sueldo: ");
+		double salario = Double.parseDouble(sc.nextLine().replace(',', '.'));
+		sc.nextLine();// Limpiar el buffer
+		System.out.println("Introduzca cuanto desearia ganar: ");
+		double salarioDeseado = Double.parseDouble(sc.nextLine().replace(',', '.'));
+		sc.nextLine();
+		System.out.println("Hola " + nombre + " de " + localidad + " tu salario es de " + salario + " €" + " deseando ganar " + salarioDeseado + " €");
+		
+		sc.close();// Cerrar el Scanner
+	}
+	
 	public static void main(String[] args) {
-		ejemplosComentarios();
-		ejemplosTipos();
-		ejemplosString();
-		ejemplosBoolean();
-		tablasVerdad();
-		ejemplosConstantes();
-		conversionesNumerosCadenas();
+//		ejemplosComentarios();
+//		ejemplosTipos();
+//		ejemplosString();
+//		ejemplosBoolean();
+//		tablasVerdad();
+//		ejemplosConstantes();
+//		conversionesNumerosCadenas();
+//		ejemplosSaltos();
+//		ejemplosFormateos();
+//		ejemplosScanner();
+		ejemplosScanner2();
 	}
 
 }
