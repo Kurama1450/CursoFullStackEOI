@@ -64,11 +64,31 @@ public class Estructuras {
 		sc.close();
 	}
 	
+	public static void IfElseIfSinElse() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Introduce tu equipo favorito");
+		String equipo = sc.nextLine();
+		String equiMayu = equipo.toUpperCase(); // Pasa la cadena a mayuscula y le asigna el valor a una variable
+		
+		if(equipo.toLowerCase().equals("barcelona")) { // Pasa a minuscula y compara
+			System.out.println("Bisca el Barca");
+		} else if(equipo.toUpperCase().equals("MADRID")) {// Pasa a mayuscula y compara
+			System.out.println("Hala Madrid");
+		}
+		else if(equipo.equalsIgnoreCase("atletico")) {// Compara sin tener en cuenta mayusculas ni minusculas
+			System.out.println("Aupa");
+		}
+		
+		System.out.println("Bienvenido al programa de futbol");
+		sc.close();
+	}
+	
 	public static void main(String[] args) {
 		
 //		ejemploIf();
 //		ejemploIfElse();
-		ejemploIfElseIfElse();
+//		ejemploIfElseIfElse();
+		IfElseIfSinElse();
 	}
 
 }
