@@ -12,11 +12,13 @@ public class ejercicio15 {
 		System.out.println("Introduzca el precio del producto 1: ");
 		double precio = Double.parseDouble(sc.next().replace(',', '.'));
 		sc.nextLine();
+		
 		System.out.println("Introduzca el nombre del producto numero 2: ");
 		String nameProduct2 = sc.nextLine();
 		System.out.println("Introduzca el precio del producto 2: ");
 		double precio2 = Double.parseDouble(sc.next().replace(',', '.'));
 		sc.nextLine();
+		
 		System.out.println("Introduzca el nombre del producto numero 3: ");
 		String nameProduct3 = sc.nextLine();
 		System.out.println("Introduzca el precio del producto 3: ");
