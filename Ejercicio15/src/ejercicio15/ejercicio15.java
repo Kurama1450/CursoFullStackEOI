@@ -23,7 +23,7 @@ public class ejercicio15 {
 		double precio3 = Double.parseDouble(sc.next().replace(',', '.'));
 		sc.nextLine();
 		
-		System.out.printf("-------------------------\n");
+		
 		System.out.printf("%-15s%12s%12s\n","Nombre","Precio","IVA");
 		System.out.printf("%-15s%11.2f$%11.2f$\n",nameProduct,precio,precio*(1+IVA));
 		System.out.printf("%-15s%11.2f$%11.2f$\n",nameProduct2,precio2,precio2*(1+IVA));
