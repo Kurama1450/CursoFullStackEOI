@@ -68,7 +68,7 @@ public class Estructuras {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Introduce tu equipo favorito");
 		String equipo = sc.nextLine();
-		String equiMayu = equipo.toUpperCase(); // Pasa la cadena a mayuscula y le asigna el valor a una variable
+		String equiMayu = equipo.toUpperCase(); // Pasa la cadena a mayuscula y le asigna el valor a una variable nueva
 		
 		if(equipo.toLowerCase().equals("barcelona")) { // Pasa a minuscula y compara
 			System.out.println("Bisca el Barca");
@@ -83,12 +83,83 @@ public class Estructuras {
 		sc.close();
 	}
 	
+	public static void ejswitch() {
+	
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Tira un dado y escribe que número ha salido: ");
+		int num = sc.nextInt();
+		switch(num) {
+		case 1:
+			System.out.println("Ha salido el uno");
+			break;
+			
+		case 2:
+			System.out.println("Ha salido el dos");
+			break;
+		
+		case 3:
+			System.out.println("Ha salido el tres");
+			break;
+			
+		case 4:
+			System.out.println("Ha salido el cuatro");
+			break;
+			
+		case 5:
+			System.out.println("Ha salido el cinco");
+			break;
+			
+		case 6:
+			System.out.println("Ha salido el seis");
+			break;
+			
+		default:
+			System.out.println("¿ Qué clase de dado tienes ?");
+			break;
+		}
+		
+		sc.close();
+	}
+	
+	public static void ejemploTernarias() {
+		int edad = 27;
+//		if(edad>=18) {
+//			System.out.println("Eres mayor de edad");
+//		} else {
+//			System.out.println("Eres menor de edad");
+//		}
+		
+		System.out.println(edad>=18?"Eres mayor de edad":"Eres menor de edad");
+		
+//		int descuento = edad>=18?5:20;
+//		System.out.println(descuento);
+//		
+//		int tresValores;
+//		if(edad<18) {
+//			tresValores=1;
+//		} else if(edad<= 18 && edad<=65) {
+//			tresValores=2;
+//		} else {
+//			tresValores = 3;
+//		}
+		
+		int tresValores = edad<18?1:(edad>=18 && edad<=65)?2:3;
+		
+		System.out.println("TresValores vale " + tresValores);
+		
+		int euros = 10;
+		System.out.println("Cuesta " + euros + " euro" + (euros!=1?"s":""));
+		System.out.println("Cuesta " + euros + " euro" + (euros!=1?"euros":"euro"));
+	}
+	
 	public static void main(String[] args) {
 		
 //		ejemploIf();
 //		ejemploIfElse();
 //		ejemploIfElseIfElse();
-		IfElseIfSinElse();
+//		IfElseIfSinElse();
+//		ejswitch();
+		ejemploTernarias();
 	}
 
 }
