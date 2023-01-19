@@ -200,10 +200,10 @@ public class HolaMundo {
 		System.out.println("Introduzca su localidad: ");
 		String localidad = sc.nextLine();
 		System.out.println("Introduzca su sueldo: ");
-		double salario = Double.parseDouble(sc.nextLine().replace(',', '.'));
+		double salario = Double.parseDouble(sc.next().replace(',', '.'));
 		sc.nextLine();// Limpiar el buffer
 		System.out.println("Introduzca cuanto desearia ganar: ");
-		double salarioDeseado = Double.parseDouble(sc.nextLine().replace(',', '.'));
+		double salarioDeseado = Double.parseDouble(sc.next().replace(',', '.'));
 		sc.nextLine();
 		System.out.println("Hola " + nombre + " de " + localidad + " tu salario es de " + salario + " €" + " deseando ganar " + salarioDeseado + " €");
 		
