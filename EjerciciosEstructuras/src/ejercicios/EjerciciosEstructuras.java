@@ -172,6 +172,64 @@ public class EjerciciosEstructuras {
 	}
 	
 	public static void ej9() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Introduzca un numero entre 1 y 12: ");
+		int mes = sc.nextInt();
+		switch(mes) {
+		case 1:
+			System.out.println("Es el mes de enero tiene 30 dias");
+			break;
+			
+		case 2:
+			System.out.println("Es el mes de febrero tiene 28 dias");
+			break;
+			
+		case 3:
+			System.out.println("Es el mes de marzo tiene 30 dias");
+			break;
+			
+		case 4:
+			System.out.println("Es el mes de abril tiene 31 dias");
+			break;
+			
+		case 5:
+			System.out.println("Es el mes de mayo tiene 30 dias");
+			break;
+			
+		case 6:
+			System.out.println("Es el mes de junio tiene 31 dias");
+			break;
+			
+		case 7:
+			System.out.println("Es el mes de julio tiene 30 dias");
+			break;
+			
+		case 8:
+			System.out.println("Es el mes de agosto tiene 31 dias");
+			break;
+			
+		case 9:
+			System.out.println("Es el mes de septiembre tiene 30 dias");
+			break;
+			
+		case 10:
+			System.out.println("Es el mes de octubre tiene 31 dias");
+			break;
+			
+		case 11:
+			System.out.println("Es el mes de noviembre tiene 30 dias");
+			break;
+			
+		case 12:
+			System.out.println("Es el mes de diciembre tiene 28 dias");
+			break;
+			
+		default:
+			System.out.println("Este numero no corresponde a ningún mes");
+			break;
+		}
+		
+		sc.close();
 		
 	}
 	
