@@ -54,13 +54,19 @@ public class EjerciciosEstructuras {
 		
 		System.out.println("Introduzca su palabra: ");
 		
-		char cadena = sc.nextLine().charAt(0);
+		String cadena = sc.nextLine();
 		
-		if(Character.isUpperCase(cadena)) {
+		if(cadena.charAt(0)>='A' && cadena.charAt(0)<='Z') {
 			System.out.println("Es mayuscula");
 		} else {
 			System.out.println("Es minúscula");
 		}
+		// Otra opción correcta
+//		if(Character.isUpperCase(cadena)) {
+//			System.out.println("Es mayuscula");
+//		} else {
+//			System.out.println("Es minúscula");
+//		}
 		
 		sc.close();
 	}
@@ -160,9 +166,9 @@ public class EjerciciosEstructuras {
 	}
 	
 	public static void ej8() {
-		int num = 38;
+		int numero = 37;
 		
-		System.out.println((num%2==0)?"Es impar":"Es par");
+		System.out.println((numero%2==0)?"El número es par":"El número es impar");
 	}
 	
 	public static void ej9() {
