@@ -152,6 +152,60 @@ public class Estructuras {
 		System.out.println("Cuesta " + euros + " euro" + (euros!=1?"euros":"euro"));
 	}
 	
+	public static void ejemploAmbito() {
+		int num = 5;
+		
+		int edad = 20;
+		
+		if(edad > 18) {
+			// int num = 6; En Java da error
+			int valor = 4;
+			System.out.println(num);
+		}
+		// System.out.println(valor); Da error porque la varialbe no existe en el Ambito general del metodo
+	}
+	
+	public static void ejemploWhile1() {
+		Scanner sc = new Scanner(System.in);
+		
+		String password = "1234";
+		boolean adivina = false;
+		while(adivina == false) {
+			System.out.println("Introduzca la contraseña");
+			String respuesta = sc.nextLine();
+			if(respuesta.equals(password)) {
+				adivina = true;
+			}
+		}
+		System.out.println("Ehnorabuena! Has entrado");
+		sc.close();
+	}
+	
+	public static void ejemploWhile2() {
+		Scanner sc = new Scanner(System.in);
+		
+		String password = "1234";
+		int intentos = 0;
+		boolean adivina = false;
+		while(!adivina && intentos < 3) {
+			intentos++;
+			System.out.println("Introduzca la contraseña");
+			String respuesta = sc.nextLine();
+			if(respuesta.equals(password)) {
+				adivina = true;
+			} else {
+				System.out.println("Has fallado , vuelve a intentarlo");
+			}
+		}
+		if(adivina) {
+			System.out.println("Acertastes");
+		} else {
+			System.out.println("Fallastes");
+		}
+		
+		sc.close();
+	}
+	
 	public static void main(String[] args) {
 		
 //		ejemploIf();
