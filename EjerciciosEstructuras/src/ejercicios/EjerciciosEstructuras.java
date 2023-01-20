@@ -106,11 +106,11 @@ public class EjerciciosEstructuras {
 		
 		int result = num1/num2;
 		
-		if(result == 0) {
-			System.out.println("Resultado negativo"+ result);
+		if(num2 != 0) {
+			System.out.println("Resultado: "+ result);
 		}
 		else {
-			System.out.println("Resultado: "+ result);
+			System.out.println("No se puede dividir entre cero");
 		}
 		
 		sc.close();
@@ -234,7 +234,18 @@ public class EjerciciosEstructuras {
 	}
 	
 	public static void ej10() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Introduce una letra: ");
+		char letra = sc.nextLine().charAt(0);
+		if(Character.isDigit(letra)) {
+			System.out.println("La letra es una cifra numerica");
+		} else if(letra == '.' || letra==',' || letra==';' || letra==':') {
+			System.out.println("La letra es un signo de puntuación");
+		} else {
+			System.out.println("Es otro caracter");
+		}
 		
+		sc.close();
 	}
 	
 	public static void ej11() {
