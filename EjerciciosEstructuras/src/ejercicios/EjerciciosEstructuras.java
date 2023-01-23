@@ -1,6 +1,8 @@
 package ejercicios;
 
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class EjerciciosEstructuras {
 
@@ -11,7 +13,9 @@ public class EjerciciosEstructuras {
 //		ej4();
 //		ej5();
 //		ej6();
-		ej8();
+//		ej8();
+//		ej13();
+		ej12();
 	}
 
 	public static void ej1() {
@@ -253,6 +257,75 @@ public class EjerciciosEstructuras {
 	}
 	
 	public static void ej12() {
+		final double MENOR_EDAD = 0.25;
+		final double DESCUENTO_SOCIO = 0.40;
+		final double DESCUENTO_JUBILADO = 0.75;
+		Scanner sc = new Scanner (System.in);  // Para leer datos por pantalla
+		double precioEntrada = 50;
+		System.out.println("Introduzca su edad:");
+		int edad = sc.nextInt();
+		sc.nextLine();
+		if(edad<18) {
+			precioEntrada = precioEntrada * (1-MENOR_EDAD);  // precio * 0,75
+		} else if(edad>=18 && edad<65) {
+			System.out.println("Es usted socio (sí/no):");
+			String respuesta = sc.nextLine();
+			// Solución con expresión regular		
+			Pattern regex = Pattern.compile("^s[iíÍ]?$", Pattern.CASE_INSENSITIVE);			
+			Matcher m = regex.matcher(respuesta);
+			if(m.matches()) {
+				precioEntrada = precioEntrada * (1 - DESCUENTO_SOCIO);
+			}
+		} else {
+			precioEntrada = precioEntrada * (1-DESCUENTO_JUBILADO);
+		}
+		System.out.println("Su precio es: " + precioEntrada);
+		sc.close();
+	}
+	
+	public static void ej12Grupo() {
+		final double MENOR_EDAD = 0.25;
+		final double DESCUENTO_SOCIO = 0.40;
+		final double DESCUENTO_JUBILADO = 0.75;
+		Scanner sc = new Scanner (System.in);  // Para leer datos por pantalla
+		double precioEntrada = 50;
+		double precioTotalGrupo = 0;
+		System.out.println("¿Cuantos sois?");
+		int personas = sc.nextInt();
+		sc.nextLine();
+		int personasAtendidas = 0;
+		while(personasAtendidas<personas) {
+			System.out.println("Datos de la persona " + personasAtendidas+1);
+			System.out.println("Introduzca su edad:");
+			int edad = sc.nextInt();
+			sc.nextLine();
+			if(edad<18) {
+				precioEntrada = precioEntrada * (1-MENOR_EDAD);  // precio * 0,75
+			} else if(edad>=18 && edad<65) {
+				System.out.println("Es usted socio (sí/no):");
+				String respuesta = sc.nextLine();
+				// Solución con expresión regular		
+				Pattern regex = Pattern.compile("^s[iíÍ]?$", Pattern.CASE_INSENSITIVE);			
+				Matcher m = regex.matcher(respuesta);
+				if(m.matches()) {
+					precioEntrada = precioEntrada * (1 - DESCUENTO_SOCIO);
+				}
+			} else {
+				precioEntrada = precioEntrada * (1-DESCUENTO_JUBILADO);
+			}
+			precioTotalGrupo += precioEntrada;
+			personasAtendidas++;
+		}
+		System.out.println("El precio del grupo es: " + precioTotalGrupo);
+		sc.close();
+	}
+	
+	public static void ej13() {
+		int val1 = 20;
 		
+		while(val1 >= 1) {
+			System.out.println(val1--);
+			
+		}
 	}
 }

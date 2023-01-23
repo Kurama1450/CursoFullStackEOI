@@ -1,5 +1,6 @@
 package estructuras;
 
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Estructuras {
@@ -188,9 +189,10 @@ public class Estructuras {
 		int intentos = 0;
 		boolean adivina = false;
 		while(!adivina && intentos < 3) {
-			intentos++;
-			System.out.println("Introduzca la contraseña");
+			
+			System.out.println("Introduzca la contraseña (Tienes " + (3-intentos) + " intento" + ((intentos!=2?"s":"") +"):"));
 			String respuesta = sc.nextLine();
+			intentos++;
 			if(respuesta.equals(password)) {
 				adivina = true;
 			} else {
@@ -204,6 +206,15 @@ public class Estructuras {
 		}
 		
 		sc.close();
+	}
+	
+	public static void acaboCurso() {
+		LocalDate fecha = LocalDate.now();
+		while(fecha.isBefore(LocalDate.parse("2023-03-30"))) {
+			System.out.println(fecha);
+			fecha = fecha.plusDays(1);
+		}
+		System.out.println("Has acabo el curso");
 	}
 	
 	public static void main(String[] args) {
