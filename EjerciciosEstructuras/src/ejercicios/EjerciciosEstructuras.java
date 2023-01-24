@@ -15,7 +15,8 @@ public class EjerciciosEstructuras {
 //		ej6();
 //		ej8();
 //		ej13();
-		ej12();
+//		ej12();
+		ej21();
 	}
 
 	public static void ej1() {
@@ -154,19 +155,50 @@ public class EjerciciosEstructuras {
 	public static void ej7() {
 		Scanner sc = new Scanner(System.in);
 		
-		System.out.println("Introduzca sus horas: ");
-		
-		int numHoras = sc.nextInt();
-		
-		System.out.println("Introduzca sus minutos: ");
-		
-		int numMin = sc.nextInt();
-		
-		System.out.println("Introduzca sus segundos: ");
-		
-		int numSeg = sc.nextInt();
+		System.out.println("Introduzca sus horas(0-23): ");
+		int numHoras = Integer.parseInt(sc.nextLine());
 		
 		
+		System.out.println("Introduzca sus minutos(0-59): ");
+		int numMin = Integer.parseInt(sc.nextLine());
+		
+		
+		System.out.println("Introduzca sus segundos(0-59): ");
+		int numSeg = Integer.parseInt(sc.nextLine());
+		
+		if(numHoras<0 || numHoras>23 || numMin<0 || numMin>59 || numSeg<0 || numSeg>59) {
+			System.out.println("Ha introducido valores erroneos");
+		} else {
+			System.out.printf("Hora es: %02d/%02d/%02d\n",numHoras,numMin,numSeg);
+		}
+		sc.close();
+	}
+	
+	public static void ej7bErroresPersonalizados() {
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("Introduzca sus horas(0-23): ");
+		int numHoras = Integer.parseInt(sc.nextLine());
+		
+		
+		System.out.println("Introduzca sus minutos(0-59): ");
+		int numMin = Integer.parseInt(sc.nextLine());
+		
+		
+		System.out.println("Introduzca sus segundos(0-59): ");
+		int numSeg = Integer.parseInt(sc.nextLine());
+		
+		if(numHoras<0 || numHoras>23)  {
+			System.out.println("Ha introducido una hora erronea");
+		} else if(numMin<0 || numMin>59) {
+			System.out.println("Ha introducido los minutos erroneos");
+			
+		} else if(numSeg<0 || numSeg>59) {
+			System.out.println("Ha introducido los segundos erroneos");
+		} else {
+			System.out.printf("Hora es: %02d/%02d/%02d\n",numHoras,numMin,numSeg);
+		}
+		sc.close();
 	}
 	
 	public static void ej8() {
@@ -327,5 +359,34 @@ public class EjerciciosEstructuras {
 			System.out.println(val1--);
 			
 		}
+	}
+	
+	public static void ej21() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Introduzca un numero: ");
+		int num = Integer.parseInt(sc.nextLine());
+		
+		for(int i = 1; i<=num ;i++) {
+			if(num%i == 0) {
+				System.out.println("El numero " + i + " es divisor de " + num);
+			}
+		}
+		
+		sc.close();
+	}
+	
+	public static void ej21b() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Introduzca un numero: ");
+		int num = Integer.parseInt(sc.nextLine());
+		int i = 1;
+		while(i<num) {
+			if(num%i == 0) {
+				System.out.println("El numero " + i + " es divisor de " + num);
+			}
+			i++;
+		}
+		
+		sc.close();
 	}
 }

@@ -1,6 +1,8 @@
 package estructuras;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Scanner;
 
 public class Estructuras {
@@ -183,29 +185,83 @@ public class Estructuras {
 	}
 	
 	public static void ejemploWhile2() {
-		Scanner sc = new Scanner(System.in);
-		
+		Scanner sc = new Scanner (System.in);  // Para leer datos por pantalla
 		String password = "1234";
 		int intentos = 0;
 		boolean adivina = false;
-		while(!adivina && intentos < 3) {
-			
-			System.out.println("Introduzca la contraseña (Tienes " + (3-intentos) + " intento" + ((intentos!=2?"s":"") +"):"));
-			String respuesta = sc.nextLine();
-			intentos++;
+		while(!adivina && intentos<3) {  // (adivina==false)			
+			System.out.println("Introduzca la contraseña (Tienes " + (3-intentos) + " intento" + (intentos!=2?"s":"") +"):");
+			String respuesta = sc.nextLine();			
 			if(respuesta.equals(password)) {
 				adivina = true;
 			} else {
-				System.out.println("Has fallado , vuelve a intentarlo");
+				System.out.println("Fallaste");
 			}
-		}
-		if(adivina) {
-			System.out.println("Acertastes");
+			intentos++;
+		}		
+		System.out.println(adivina?"Acertaste":"Gastaste todas tus intentos");		
+		/*if(adivina) {  // (adivina==true)
+			System.out.println("Acertaste");
 		} else {
-			System.out.println("Fallastes");
-		}
-		
+			System.out.println("Gastaste todas tus intentos");
+		}*/
 		sc.close();
+	}
+	
+	public static void ejemploDoWhile1() {
+		Scanner sc = new Scanner (System.in);  // Para leer datos por pantalla
+		String password = "1234";
+		int intentos = 0;
+		boolean adivina = false;
+		do {  		
+			System.out.println("Introduzca la contraseña (Tienes " + (3-intentos) + " intento" + (intentos!=2?"s":"") +"):");
+			String respuesta = sc.nextLine();			
+			if(respuesta.equals(password)) {
+				adivina = true;
+			} else {
+				System.out.println("Fallaste");
+			}
+			intentos++;
+		} while(!adivina && intentos<3);	
+		System.out.println(adivina?"Acertaste":"Gastaste todas tus intentos");		
+		/*if(adivina) {  // (adivina==true)
+			System.out.println("Acertaste");
+		} else {
+			System.out.println("Gastaste todas tus intentos");
+		}*/
+		sc.close();
+	}
+	
+	public static void ejemploDoWhile2() {
+		Scanner sc = new Scanner(System.in);
+		int opcion = -1;
+		do {
+			System.out.println("1. Primera opción");
+			System.out.println("2. Segunda opción");
+			System.out.println("3. Tercera opción");
+			System.out.println("4. Cuarta opción");
+			System.out.println("0. Salir");
+			opcion = sc.nextInt();
+			sc.nextLine();
+			switch(opcion) {
+			case 1 -> System.out.println("Has elegido la primera opción");
+			case 2 -> System.out.println("Has elegido la segunda opción");
+			case 3 -> System.out.println("Has elegido la tercera opción");
+			case 4 -> System.out.println("Has elegido la cuarta opción");
+			case 0 -> System.out.println("Gracias por usar nuestro programa");
+			default -> System.out.println("Opcion seleccionada no es correcta");
+			}
+		} while(opcion!=0);
+		sc.close();
+	}
+	
+	public static void offTopicBloqueTexto() {
+		String texto = "Primera línea\n" + 
+						"Segunda línea\n" + 
+						"\t\tTercera línea";
+		System.out.println(texto); //Java 11
+		
+		
 	}
 	
 	public static void acaboCurso() {
@@ -217,6 +273,22 @@ public class Estructuras {
 		System.out.println("Has acabo el curso");
 	}
 	
+	public static void imprimirHoraFecha() {
+		//Java 8 
+		LocalDate fecha = LocalDate.now();
+		LocalTime hora = LocalTime.now();
+		LocalDateTime fechaHora = LocalDateTime.now();
+		System.out.println(fecha);
+		System.out.println(hora);
+		System.out.println(fechaHora);
+	}
+	
+	public static void ejemploFor1() {
+		for(int i = 0; i <10; i++) {
+			System.out.println("Repetición número: " + (i + 1));
+		}
+	}
+	
 	public static void main(String[] args) {
 		
 //		ejemploIf();
@@ -224,7 +296,8 @@ public class Estructuras {
 //		ejemploIfElseIfElse();
 //		IfElseIfSinElse();
 //		ejswitch();
-		ejemploTernarias();
+//		ejemploTernarias();
+		ejemploDoWhile2();
 	}
 
 }
