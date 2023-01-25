@@ -16,7 +16,9 @@ public class EjerciciosEstructuras {
 //		ej8();
 //		ej13();
 //		ej12();
-		ej21();
+//		ej18();
+		ej19();
+//		ej21();
 	}
 
 	public static void ej1() {
@@ -359,6 +361,47 @@ public class EjerciciosEstructuras {
 			System.out.println(val1--);
 			
 		}
+	}
+	
+	public static void ej18() {
+		for(int i = 0; i<= 100; i+=5) {
+
+			System.out.println("Los siguientes numeros son: " + i);
+		}
+	}
+	
+	public static void ej18b() {
+		for(int i = 0; i<= 100; i++) {
+			if(i%5==0) {
+				System.out.println("Los siguientes numeros son: " + i);
+			}
+		}
+	}
+	
+	public static void ej19() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Introduzca un numero: ");
+		int num = Integer.parseInt(sc.nextLine());
+		for (int i=1; i<=num; i++) {
+
+			 System.out.print(i + ((i != num) ? ", " : ""));
+
+			 }
+		sc.close();
+	}
+	
+	public static void ej19b() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Introduzca un numero: ");
+		int num = Integer.parseInt(sc.nextLine());
+		for (int i=1; i<=num; i++) {
+			if(i!=num) {
+				System.out.print(i+",");
+			} else {
+				System.out.println(i);
+			}
+		}
+		sc.close();
 	}
 	
 	public static void ej21() {
