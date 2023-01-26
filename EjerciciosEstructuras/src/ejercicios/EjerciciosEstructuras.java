@@ -17,8 +17,11 @@ public class EjerciciosEstructuras {
 //		ej13();
 //		ej12();
 //		ej18();
-		ej19();
+//		ej19();
 //		ej21();
+		ej23();
+//		ej25();
+//		ej26();
 	}
 
 	public static void ej1() {
@@ -428,6 +431,58 @@ public class EjerciciosEstructuras {
 				System.out.println("El numero " + i + " es divisor de " + num);
 			}
 			i++;
+		}
+		
+		sc.close();
+	}
+	
+	public static void ej23() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Introduzca un numero: ");
+		int num = Integer.parseInt(sc.nextLine());
+		
+		for(int i = num; i >= 1; i--) {
+			for(int j = 0; j <(num-i); j++) {
+				System.out.print("\t");
+			}
+			for(int z = num; z >= num-i+1; z--) {
+				System.out.print(i+"\t");
+			}
+			System.out.print("\n");
+		}
+		sc.close();
+	}
+	
+	public static void ej25() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Introduzca un numero: ");
+		int num = Integer.parseInt(sc.nextLine());
+		
+		for(int i = 0; i < num; i++) {
+			for(int j = 0; j<=i; j++) {
+				System.out.print("*");
+			}
+			System.out.println();
+		}
+		
+		sc.close();
+	}
+	
+	public static void ej26() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Introduzca un numero: ");
+		int num = Integer.parseInt(sc.nextLine());
+		
+		for(int i = num; i>= 1; i--) {
+			for(int j = 1; j<i; j++) {
+				System.out.print(" ");
+			}
+			
+			for(int k = num; k>=i;k--) {
+				System.out.print("*");
+			}
+			
+			System.out.println();
 		}
 		
 		sc.close();
