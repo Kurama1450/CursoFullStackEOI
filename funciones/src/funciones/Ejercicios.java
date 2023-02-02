@@ -64,6 +64,20 @@ public class Ejercicios {
 		sc.close();
 	}
 	
+	public static int ej9(String cadena, String subcadena) {
+		
+		int posiBusca = 0; //Variable que almacena a partir de que posicion buscar la subcadena.
+		int resultado = 0; //Veces que encuentra la subcadena
+		while((posiBusca = cadena.indexOf(subcadena,posiBusca))!=-1) {//Lo encuentra
+			resultado++;
+			posiBusca++;
+		}
+		return resultado;
+	}
+	
+	
+	
+	
 	public static void main(String[] args) {
 		System.out.println(ej6(12.45,14.18,25.94,56,78));
 		int maximo = ej8(2,8,99,4,150,500,550,25,50,12,14);
