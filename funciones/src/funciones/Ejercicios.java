@@ -76,7 +76,9 @@ public class Ejercicios {
 	}
 	
 	
-	
+	public static void ej12(String[] cadenas) {
+		Arrays.sort(cadenas);
+	}
 	
 	public static void main(String[] args) {
 		System.out.println(ej6(12.45,14.18,25.94,56,78));
