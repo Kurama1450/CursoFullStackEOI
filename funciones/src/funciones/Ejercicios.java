@@ -1,5 +1,6 @@
 package funciones;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
@@ -78,6 +79,33 @@ public class Ejercicios {
 	
 	public static void ej12(String[] cadenas) {
 		Arrays.sort(cadenas);
+	}
+	
+	public static LocalDate convertirFechaSubString(String fechaCadena) {
+//		String dia = fechaCadena.substring(0, 2);
+//		String mes = fechaCadena.substring(3, 5);
+//		String anyo = fechaCadena.substring(6, 10);
+//		LocalDate resultado = LocalDate.of(Integer.parseInt(anyo), Integer.parseInt(mes), Integer.parseInt(dia));
+//		return resultado;
+		return LocalDate.of(Integer.parseInt(fechaCadena.substring(6, 10)), 
+				Integer.parseInt(fechaCadena.substring(3, 5)), 
+				Integer.parseInt(fechaCadena.substring(0, 2)));
+		
+	}
+	
+	public static LocalDate sumarTiempos(LocalDate fechaInicio, int dias, int meses, int anyos) {
+		return fechaInicio.plusYears(anyos).plusMonths(meses).plusDays(dias);
+	}
+	
+	public static LocalDate ej15(String fechaCadena) {
+		//Convertir el String en LocalDate
+		LocalDate fecha = convertirFechaSubString(fechaCadena);
+		
+		//Sumar tiempos a un LocalDate
+//		fecha.plusYears(2).plusMonths(3).plusDays(5);
+		fecha = sumarTiempos(fecha,5,3,2);
+		//Devolver el resultado
+		return fecha;
 	}
 	
 	public static void main(String[] args) {
