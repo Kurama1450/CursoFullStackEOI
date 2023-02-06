@@ -19,9 +19,10 @@ public class EjerciciosEstructuras {
 //		ej18();
 //		ej19();
 //		ej21();
-		ej23();
+//		ej23();
 //		ej25();
 //		ej26();
+		ej27();
 	}
 
 	public static void ej1() {
@@ -484,6 +485,39 @@ public class EjerciciosEstructuras {
 			
 			System.out.println();
 		}
+		
+		sc.close();
+	}
+	
+	public static void ej27() {
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("Indiqueme el ancho del rectángulo: ");
+		int ancho = sc.nextInt();
+		
+		System.out.println("Indiqueme el alto del rectángulo: ");
+		int alto = sc.nextInt();
+		
+		//Primera fila
+		for(int columna =1; columna <=ancho; columna++)
+			System.out.print("*");
+		System.out.println();
+		
+		//Filas Intermedias
+		for(int fila =1; fila <=alto-2; fila++)
+		{
+			System.out.print("*");
+			for(int columna = 1; columna <= ancho-2; columna++)
+			{
+				System.out.print(" ");
+			}
+			System.out.println("*");
+		}
+				
+		//Última fila	
+		for(int columna =1; columna <=ancho; columna++)
+			System.out.print("*");
+		System.out.println();
 		
 		sc.close();
 	}
