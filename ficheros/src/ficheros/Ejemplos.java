@@ -42,7 +42,8 @@ public class Ejemplos {
 		         }
 		      }
 		 }
-	
+	//Files nos permite trabajar con el contenido de los ficheros
+	//Path nos permite trabajar con las rutas del ordenador (ej:C/ficheros/archivo.txt)
 	public static void leerFicheroJava8(String nombreFichero) throws IOException {
 		Files.readAllLines(Paths.get(nombreFichero)).forEach(l->System.out.println(l));
 
