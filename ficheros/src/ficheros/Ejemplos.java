@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
@@ -49,10 +50,29 @@ public class Ejemplos {
 
 	}
 	
-	public static void main(String[] args) throws IOException {
-		leerFicheroJava5("C:\\Ficheros\\archivo.txt");
-		leerFicheroJava8("C:\\Ficheros\\archivo.txt");
+	public static void leerFicheroJava8(Path ruta) throws IOException {
+		Files.readAllLines(ruta).forEach(l->System.out.println(l));
 
+	}
+	
+	public static List<String> devolverLineasJava8(Path ruta){
+		try {
+			List<String> lineas = Files.readAllLines(ruta);
+			return lineas;
+		} catch (IOException e) {
+			//e.printStackTrace();
+			System.out.println("No se puede acceder al fichero");
+			return null;
+		}
+	}
+	
+	public static void main(String[] args) throws IOException {
+//		leerFicheroJava5("C:\\Ficheros\\archivo.txt");
+//		leerFicheroJava8("C:\\Ficheros\\archivo.txt");
+//		leerFicheroJava8(Paths.get("datos","dates.txt"));//Llamada con ruta relativa independiente del sistema operativo
+		List<String> datosDevueltos= devolverLineasJava8(Paths.get("C:\\Ficheros\\archivo.txt"));
+		if(datosDevueltos != null)
+			datosDevueltos.forEach(l->System.out.println(l));
 	}
 
 }
