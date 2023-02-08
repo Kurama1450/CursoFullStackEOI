@@ -93,6 +93,11 @@ public class Ejemplos {
 					.filter(e->e.getSueldo()<=20000)
 					.filter(e->e.getNombre().length()>4)
 					.forEach(e->System.out.println(e));
+				// Filtra e imprime:
+				System.out.println("Jugadores que tengan una 'N' en su nombre");
+				jugadores.stream()
+					.filter(e->e.getNombre().toLowerCase().contains("n"))
+					.forEach(e->System.out.println(e));		
 	}
 	
 	public static void main(String[] args) {
