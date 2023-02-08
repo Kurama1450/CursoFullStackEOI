@@ -1,7 +1,9 @@
 package ficheros;
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
@@ -25,7 +27,34 @@ public class Ejercicios {
 		sc.close();
 	}
 	
+	public static void ej2(String nombreFichero) {
+		Scanner sc = new Scanner(System.in);
+		String linea;
+		try {
+			Files.writeString(Paths.get(nombreFichero), " ");
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		do {
+			System.out.println("Introduzca la linea que quiere insertar en el fichero(FIN para finalizar): ");
+			linea = sc.nextLine();
+			if(!linea.equalsIgnoreCase("fin")) {
+				try {
+					Files.writeString(
+							Paths.get(nombreFichero),
+							linea+"\n",
+							StandardOpenOption.APPEND);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}while(!linea.equalsIgnoreCase("fin"));
+		
+		sc.close();
+	}
+	
 	public static void main(String[] args) {
-		ej7_5();
+//		ej7_5();
+		ej2("C:/Ficheros/ej2.txt");
 	}
 }
