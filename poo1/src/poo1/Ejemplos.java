@@ -1,8 +1,11 @@
 package poo1;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Ejemplos {
 
-	public static void main(String[] args) {
+	public static void ejemplosCoches() {
 		Coche miCoche = new Coche();  // Me crea un coche sin datos. Usa el constructor vacío
 		//miCoche.numeroRuedas = -4;
 		//miCoche.marca = "Seat";
@@ -44,5 +47,56 @@ public class Ejemplos {
 		System.out.println("Voy a imprimir el intentoClon:");
 		System.out.println(intentoClon);
 		System.out.println(z3);
+		
+		//Probar equals
+		
+		if(z3.equals(clonZ3)) {
+			System.out.println("Los coches son iguales");
+		} else {
+			System.out.println("Los coches son diferentes");
+		}
+	}
+	
+	public static void ejercicio1() {
+		Jugador juga1 = new Jugador("Victor", 5, 999);
+		System.out.println("Nuestro primer jugador es: "+ juga1.getNombre() + " con " + juga1.getEdad() + " años y cobra " + juga1.getSueldo());
+		
+		Jugador clonjuga1 = new Jugador(juga1);
+		System.out.println(clonjuga1);
+	}
+
+	public static void ejemloListaJugadores() {
+		List<Jugador> jugadores = new ArrayList<Jugador>();
+		
+		Jugador juga1 = new Jugador("Victor", 19, 9999);
+		Jugador juga2 = new Jugador("Hector", 25, 10999);
+		Jugador juga3 = new Jugador("Hugo", 22, 9990);
+		Jugador juga4 = new Jugador("Robert", 20, 20000);
+		
+		//Meter jugadores en lalista
+		jugadores.add(juga1);
+		jugadores.add(juga2);
+		jugadores.add(juga3);
+		jugadores.add(juga4);
+		
+		//Imprimir todos los jugadores
+		jugadores.forEach(e->System.out.println(e));
+		//Filtra e imprime
+		System.out.println("Jugaodres que ganan más de 10000 euros");
+		jugadores.stream()
+			.filter(e->e.getSueldo()>10000)
+			.forEach(e->System.out.println(e));
+		//Filtra e imprime
+				System.out.println("Jugaodres que ganan entre 10000 y 20000 euros y su nombre tenga ");
+				jugadores.stream()
+					.filter(e->e.getSueldo()>=10000)
+					.filter(e->e.getSueldo()<=20000)
+					.filter(e->e.getNombre().length()>4)
+					.forEach(e->System.out.println(e));
+	}
+	
+	public static void main(String[] args) {
+//		ejemplosCoches();
+		ejercicio1();
 	}
 }

@@ -1,5 +1,7 @@
 package poo1;
 
+import java.util.Objects;
+
 public class Coche {
 
 	// 1. propiedades o atributos
@@ -40,7 +42,7 @@ public class Coche {
 		
 		// 2b. Constructor de copia (Optativo*). Crea un objeto igual al que te pasan
 		public Coche(Coche c) {
-			super();
+			super();//Tiene sentido si heredas , si no , ni ayuda ni molesta.
 			this.setNumeroRuedas(c.numeroRuedas);
 			this.marca = c.marca;
 			this.modelo = c.modelo;
@@ -51,11 +53,11 @@ public class Coche {
 		// 3. Generar Getters and Setters	
 
 
-		public int getNumeroRuedas() {
+		public int getNumeroRuedas() {//Obtener la informacion
 			return numeroRuedas;
 		}
 
-		public void setNumeroRuedas(int numeroRuedas) {
+		public void setNumeroRuedas(int numeroRuedas) {//Pone la informacion.
 			if(numeroRuedas==4 || numeroRuedas==5)
 				this.numeroRuedas = Math.abs(numeroRuedas);  // Si me ponen un número negativo lo pasa a positivo
 			else
@@ -107,8 +109,26 @@ public class Coche {
 			return "Coche (numeroRuedas=" + numeroRuedas + ", marca=" + marca + ", modelo=" + modelo + ", matricula="
 					+ this.getMatricula() + ", precio=" + precio + ")";
 		}
+
+		//HasCode and equals . Define el criterio de igualdad de dos objetos de la misma clase.
+		@Override
+		public int hashCode() {
+			return Objects.hash(marca);
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			Coche other = (Coche) obj;
+			return Objects.equals(marca, other.marca);
+		}
 	
-	
+		
 	
 	
 }
