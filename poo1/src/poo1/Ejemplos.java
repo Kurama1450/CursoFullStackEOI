@@ -82,12 +82,12 @@ public class Ejemplos {
 		//Imprimir todos los jugadores
 		jugadores.forEach(e->System.out.println(e));
 		//Filtra e imprime
-		System.out.println("Jugaodres que ganan más de 10000 euros");
+		System.out.println("Jugadores que ganan más de 10000 euros");
 		jugadores.stream()
 			.filter(e->e.getSueldo()>10000)
 			.forEach(e->System.out.println(e));
 		//Filtra e imprime
-				System.out.println("Jugaodres que ganan entre 10000 y 20000 euros y su nombre tenga ");
+				System.out.println("Jugadores que ganan entre 10000 y 20000 euros y su nombre tenga ");
 				jugadores.stream()
 					.filter(e->e.getSueldo()>=10000)
 					.filter(e->e.getSueldo()<=20000)
