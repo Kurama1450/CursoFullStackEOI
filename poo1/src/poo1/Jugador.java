@@ -11,7 +11,7 @@ public class Jugador {
 	public Jugador() {
 		
 	}
-	
+
 	public Jugador(String nombre, int edad, double sueldo) {
 		super();
 		this.nombre = nombre;
@@ -19,11 +19,11 @@ public class Jugador {
 		this.setSueldo(sueldo);
 	}
 	
-	public Jugador(Jugador juga) {
+	public Jugador(Jugador j) {
 		super();
-		this.nombre = juga.nombre;
-		this.setEdad(juga.edad);
-		this.setSueldo(juga.sueldo);
+		this.nombre = j.nombre;
+		this.setEdad(j.edad);
+		this.setSueldo(j.sueldo);
 	}
 
 	public String getNombre() {
@@ -39,10 +39,7 @@ public class Jugador {
 	}
 
 	public void setEdad(int edad) {
-		if(edad<18)
-			this.edad = 18;
-		else
-			this.edad=Math.abs(edad);
+		this.edad = Math.abs(edad);
 	}
 
 	public double getSueldo() {
@@ -50,14 +47,9 @@ public class Jugador {
 	}
 
 	public void setSueldo(double sueldo) {
-		if(sueldo<1000)
-			this.sueldo = 1000;
-		else
-			this.sueldo=Math.abs(sueldo);
+		this.sueldo = Math.abs(sueldo);
 	}
 
-	
-	
 	@Override
 	public String toString() {
 		return "Jugador [nombre=" + nombre + ", edad=" + edad + ", sueldo=" + sueldo + "]";
@@ -81,5 +73,13 @@ public class Jugador {
 				&& Double.doubleToLongBits(sueldo) == Double.doubleToLongBits(other.sueldo);
 	}
 	
+	public String nombreOculto() {
+		/*String resultado;
+		int numLetras = nombre.length();
+		resultado = nombre.substring(0,2) + "*".repeat(numLetras-2);
+		return resultado;*/
+		
+		return nombre.substring(0,2) + "*".repeat(nombre.length()-2);	
+	}
 	
 }
