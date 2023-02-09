@@ -11,8 +11,9 @@ public class Equipo {
 	private List<Jugador> jugadores;
 	private double presupuesto;
 	
-	public Equipo() {
-		
+	public Equipo() {  // El constructor vacío que contenga objetos o listas de objetos debe asignar memoria para ellos.
+		estadio = new Estadio();
+		jugadores = new ArrayList<Jugador>(); // Creamos el objeto para poder meter elementos
 	}
 
 	public Equipo(String nombre, Estadio estadio, List<Jugador> jugadores, double presupuesto) {

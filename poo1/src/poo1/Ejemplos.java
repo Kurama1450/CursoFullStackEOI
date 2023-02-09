@@ -230,6 +230,14 @@ public class Ejemplos {
 		*/
 	}
 	
+	public static void falloSiNoSeCorrige() {
+		Equipo equipo = new Equipo();
+		Jugador fran = new Jugador("Fran", 45, 50000);
+		equipo.getJugadores().add(fran);
+		equipo.getEstadio().setNombre("Mi estadio");
+		System.out.println("Fin del programa");
+	}
+	
 	public static void ejercicio3() {
 		List<Jugador> jugadores = new ArrayList<Jugador>();
 		Jugador jugador1 = new Jugador("Fran", 45, 50000);
