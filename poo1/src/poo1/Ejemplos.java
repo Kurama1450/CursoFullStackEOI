@@ -183,10 +183,84 @@ public class Ejemplos {
 		System.out.println(madrid);	// Imprimo el Madrid	
 	}
 	
+	public static void ejercicio2() {
+		// Creo una lista vacía para almacenar los jugadores
+		List<Jugador> jugadores = new ArrayList<Jugador>();
+		Jugador jugador1 = new Jugador("Fran", 45, 50000);
+		Jugador jugador2 = new Jugador("David", 20, 60000);
+		jugadores.add(jugador1);  // jugador que ocupa la posición 0 de la lista
+		jugadores.add(jugador2); // jugador que ocupa la posición 1 de la lista
+		jugadores.add(null);     // jugador que ocupa la posición 2 de la lista
+		jugadores.add(null);	 // jugador que ocupa la posición 3 de la lista
+		Jugador jugador4 = new Jugador("Paco", 45, 50000);
+		Jugador jugador5 = new Jugador("Luis", 20, 60000);
+		jugadores.add(jugador4);
+		jugadores.add(jugador5);
+		//System.out.println(jugadores);
+		
+		// Programación estructurada
+		/*for(Jugador jugador : jugadores) {
+			//System.out.println(jugador);
+			try {
+				System.out.println(jugador.getNombre());
+			} catch (Exception e) {
+				System.out.println("Este jugador es un nulo");
+			}
+		}*/
+		// Programación estructurada
+		/*for(Jugador jugador : jugadores) {
+			//System.out.println(jugador);
+			if(jugador!=null)
+				System.out.println(jugador.getNombre());			
+		}*/
+
+		jugadores.stream()
+			.filter(e->e!=null)  // filtro para no trabajar con los nulos
+			.forEach(e->System.out.println(e.getNombre()));  // obtengo el nombre de los que quedan
+
+		/*
+		jugadores.stream()
+			.forEach(e->{
+				if(e!=null)
+					System.out.println(e.getNombre());
+			}); */
+		/*
+		jugadores.stream()
+			.forEach(e->System.out.print((e!=null)?e.getNombre() + "\n":""));
+		*/
+	}
+	
+	public static void ejercicio3() {
+		List<Jugador> jugadores = new ArrayList<Jugador>();
+		Jugador jugador1 = new Jugador("Fran", 45, 50000);
+		Jugador jugador2 = new Jugador("David", 20, 60000);
+		jugadores.add(jugador1);  // jugador que ocupa la posición 0 de la lista
+		jugadores.add(jugador2); // jugador que ocupa la posición 1 de la lista
+		jugadores.add(null);     // jugador que ocupa la posición 2 de la lista
+		jugadores.add(null);	 // jugador que ocupa la posición 3 de la lista
+		Jugador jugador4 = new Jugador("Paco", 45, 50000);
+		Jugador jugador5 = new Jugador("Luis", 20, 60000);
+		jugadores.add(jugador4);
+		jugadores.add(jugador5);
+		List<Jugador> jugadores2 = new ArrayList<Jugador>();//La segunda lista inicialmente esta vacia.
+		//Copiar una lista a partir de otroa con programacion estructurada
+		for(Jugador jugador : jugadores){
+			if(jugador!=null)
+				jugadores2.add(new Jugador(jugador));
+			else
+				jugadores2.add(null);
+		}
+		jugadores2.get(0).setNombre("Posicion 0");
+		System.out.println(jugadores);
+		System.out.println(jugadores2);
+	}
+	
 	public static void main(String[] args) {
 		//ejemplosCoches();
 		//ejercicio1();	
 		//ejemploListaJugadores();
-		ejemploEquipos();
+//		ejercicio2();
+//		ejemploEquipos();
+		ejercicio3();
 	}
 }
