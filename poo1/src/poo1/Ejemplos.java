@@ -263,12 +263,21 @@ public class Ejemplos {
 		System.out.println(jugadores2);
 	}
 	
+	public static void ejercicio4() {
+		Equipo equipo = new Equipo();
+		equipo.setNombre("Equipo Coast");
+//		equipo.setJugadores(null);
+		equipo.addJugador(new Jugador("Jorge",23,100000));
+		System.out.println(equipo);
+	}
+	
 	public static void main(String[] args) {
 		//ejemplosCoches();
 		//ejercicio1();	
 		//ejemploListaJugadores();
 //		ejercicio2();
 //		ejemploEquipos();
-		ejercicio3();
+//		ejercicio3();
+		ejercicio4();
 	}
 }

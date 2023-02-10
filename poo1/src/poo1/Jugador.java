@@ -82,4 +82,5 @@ public class Jugador {
 		return nombre.substring(0,2) + "*".repeat(nombre.length()-2);	
 	}
 	
+	
 }
