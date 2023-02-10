@@ -268,7 +268,13 @@ public class Ejemplos {
 		equipo.setNombre("Equipo Coast");
 //		equipo.setJugadores(null);
 		equipo.addJugador(new Jugador("Jorge",23,100000));
-		System.out.println(equipo);
+		equipo.addJugador(new Jugador("Jordi",20,110000));
+		equipo.addJugador(new Jugador("Paco",21,120000));
+		equipo.addJugador(new Jugador("Adrian",22,130000));
+		equipo.deleteJugadores(0);//Borramos el primer jugador
+		equipo.getJugadores().forEach(e->System.out.println(e));//Muestra todos los jugadores de la lista.
+		System.out.println("El sueldo de todos los jugadores es: " +equipo.totalSueldos());
+		
 	}
 	
 	public static void main(String[] args) {

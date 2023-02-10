@@ -108,4 +108,64 @@ public class Equipo {
 			return false;
 		}
 	}
+	/**
+	 * Devuelve el numero total de jugadores.
+	 * @param j
+	 * @return
+	 */
+	public int getNumJugadores(Jugador j) {
+		return jugadores.size();//Size devuelve el tamaño de la lista
+		
+	}
+	/**
+	 * Devuelve el jugador de una posicion si existiera , si no devuelve null.
+	 * @param posicion
+	 * @return
+	 */
+	public Jugador getJugadores(int posicion) {
+		try {
+			return jugadores.get(posicion);//get accede a una posicion de la lista.
+		} catch (Exception e) {
+			return null;
+		}
+	}
+	
+	/**
+	 * Borra el jugador de esa posicion si existe
+	 * @param j
+	 * @return
+	 */
+	public void deleteJugadores(int posicion) {
+		 try {
+			jugadores.remove(posicion);
+			return;
+		} catch (Exception e) {
+			return;
+		}
+		
+	}
+	
+	/**
+	 * Devuelve el sueldo total de todos los jugadores de la lista.
+	 * @param j
+	 * @return
+	 */
+	public double totalSueldos() {
+		//Estructurada
+//		double sumaSueldos = 0;
+//		for(Jugador jugador : jugadores)
+//			sumaSueldos += jugador.getSueldo();
+//		
+//		return sumaSueldos;
+		
+		//Funcional A:
+		
+//		double[] sumaSueldos = new double[1];
+//		jugadores.forEach(e->sumaSueldos[0]+=e.getSueldo());
+//		return sumaSueldos[0];
+		
+		//Funcional B:
+		
+		return jugadores.stream().mapToDouble(e->e.getSueldo()).sum();//Nos quedamos solo con los sueldos y los sumamos todos.
+	}
 }
