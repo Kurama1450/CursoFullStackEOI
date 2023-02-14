@@ -2,14 +2,15 @@ package poo1;
 
 import java.util.Objects;
 
-public class Jugador {
-
+public class Jugador implements IHablador {  // hereda de Object
+	
 	private String nombre;
 	private int edad;
 	private double sueldo;
+	static private int contador;
 	
 	public Jugador() {
-		
+		contador++;
 	}
 
 	public Jugador(String nombre, int edad, double sueldo) {
@@ -17,6 +18,7 @@ public class Jugador {
 		this.nombre = nombre;
 		this.setEdad(edad);
 		this.setSueldo(sueldo);
+		contador++;
 	}
 	
 	public Jugador(Jugador j) {
@@ -24,6 +26,7 @@ public class Jugador {
 		this.nombre = j.nombre;
 		this.setEdad(j.edad);
 		this.setSueldo(j.sueldo);
+		contador++;
 	}
 
 	public String getNombre() {
@@ -48,6 +51,15 @@ public class Jugador {
 
 	public void setSueldo(double sueldo) {
 		this.sueldo = Math.abs(sueldo);
+	}
+	
+
+	public static int getContador() {
+		return contador;
+	}
+
+	public static void setContador(int contador) {
+		Jugador.contador = contador;
 	}
 
 	@Override
@@ -81,6 +93,15 @@ public class Jugador {
 		
 		return nombre.substring(0,2) + "*".repeat(nombre.length()-2);	
 	}
-	
+
+	@Override
+	public void hablar() {
+		System.out.println("hola");		
+	}
+
+	@Override
+	public void gritar() {
+		System.out.println("HOLA");		
+	}
 	
 }
