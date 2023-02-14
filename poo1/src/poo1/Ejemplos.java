@@ -410,6 +410,11 @@ public class Ejemplos {
 		
 	}
 
+	public static void ej1y2deHerencia() {
+		TiendaLicores tiendaLicores = new TiendaLicores();
+		tiendaLicores.bienvenida();
+	}
+	
 	public static void main(String[] args) {
 		// ejemplosCoches();
 		// ejercicio1Ampliado();
@@ -425,7 +430,8 @@ public class Ejemplos {
 		// global2();
 		// jugadoresGlobal.forEach(e->System.out.println(e));
 		// ejercicio4();
-		ejemplosHerencias();
+//		ejemplosHerencias();
+		ej1y2deHerencia();
 	}
 
 }
