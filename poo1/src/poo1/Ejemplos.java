@@ -277,6 +277,42 @@ public class Ejemplos {
 		
 	}
 	
+	public static void ejemplosHerencias() {
+		List<String> cadenas = new ArrayList<String>();
+		//Animal animal = new Animal("Mi animal",10);  // Falla al ser clase Abstracta
+		Ave pajaro = new Ave(true);
+		Ave gallina = new Ave("Animal desconocido", 1, false);
+
+		
+		//animal.comer();
+		
+		//pajaro.comer();
+		pajaro.ponerHuevos();
+
+		System.out.println("El pájaro se llama : " + pajaro.getNombre());
+		
+		Mamifero leon = new Mamifero("León", 210, true);
+		leon.comer();
+		System.out.println(pajaro.toString());
+		System.out.println(leon.toString());
+		Mamifero gato = new Mamifero("Animal desconocido",1,true);
+		
+		if(pajaro.equals(gallina)) {
+			System.out.println("El pájaro es igual a la gallina");
+		} else {
+			System.out.println("El pájaro y la gallina no son iguales");
+		}
+		
+		// Aquí aunque se llaman igual y pesan lo mismo y son animales
+		// los detecta diferente porque son de distinta clase.
+		if(pajaro.equals(gato)) {
+			System.out.println("El pájaro es igual al gato");
+		} else {
+			System.out.println("El pájaro y el gato no son iguales");
+		}
+
+	}
+	
 	public static void main(String[] args) {
 		//ejemplosCoches();
 		//ejercicio1();	
@@ -284,6 +320,7 @@ public class Ejemplos {
 //		ejercicio2();
 //		ejemploEquipos();
 //		ejercicio3();
-		ejercicio4();
+//		ejercicio4();
+		ejemplosHerencias();
 	}
 }
