@@ -2,9 +2,14 @@ package com.nestorcosta.colecciones;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+
+import com.nestorcosta.colecciones.entidades.Persona;
 
 /**
  * Hello world!
@@ -91,10 +96,49 @@ public class App
 		//Con funcional seria asi
 		traducciones.forEach((clave, valor) -> System.out.println(clave + " en inglés es: " + valor));
 
+		Map<Integer,Persona> personas=new HashMap<>();
+		personas.put(1,new Persona("Fran",10000));
+		personas.put(2,new Persona("Pepe",10000));
+		personas.put(3,new Persona("Jose",10000));
+		personas.put(4,new Persona("Luis",10000));
+		
+		Persona persona3 = personas.get(3);
+		System.out.println(persona3);
+	}
+	
+	public static void ejemploSet() {
+		//NO PERMITE ELEMENTOS DUPLICADOS
+		Set<Persona> personas = new HashSet<>();
+		personas.add(new Persona("Fran",10000));
+		personas.add(new Persona("Luis",10000));
+		personas.add(new Persona("Fran",10000));//La ignora
+		personas.add(new Persona("Fran",10000));//La ignora
+		personas.add(new Persona("fran",10000));
+		
+		System.out.println("El numero de personas es: " + personas.size());//3
+	}
+	
+	public static void ejercicio1() {
+		// Lista que almacena números
+		List<Integer> numeros = new ArrayList<Integer>(Arrays.asList(10,20,30,40));
+		numeros.add(50);
+		numeros.add(60);
+		System.out.println(numeros);
+		numeros.removeIf(e->e.equals(20));
+		System.out.println(numeros);
+		numeros.add(1,25);
+		numeros.add(2,26);
+		System.out.println(numeros);
+		numeros.sort(Comparator.reverseOrder());
+		numeros.forEach(e->System.out.print(e + ", "));
+		
 	}
 	
     public static void main( String[] args )
     {
-        ejemplosListas();
+//        ejemplosListas();
+//        ejemploMap();
+//        ejemploSet();
+    	ejercicio1();
     }
 }
