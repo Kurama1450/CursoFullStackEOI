@@ -2,6 +2,7 @@ package com.nestorcosta.colecciones;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -129,7 +130,10 @@ public class App
 		numeros.add(1,25);
 		numeros.add(2,26);
 		System.out.println(numeros);
-		numeros.sort(Comparator.reverseOrder());
+//		numeros.sort(Comparator.reverseOrder());
+//		numeros.sort(Collections.reverseOrder());
+		Collections.reverse(numeros);//No ordena ni desordena , le da la vuelta
+//		numeros.sort((e1,e2)->e2-e1);//Crearte tu mismo un comparador.
 		numeros.forEach(e->System.out.print(e + ", "));
 		
 	}
