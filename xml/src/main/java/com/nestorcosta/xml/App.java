@@ -18,6 +18,7 @@ import org.w3c.dom.NodeList;
 import com.nestorcosta.xml.entidades.Asignatura;
 import com.nestorcosta.xml.entidades.NoticiaMarca;
 import com.nestorcosta.xml.entidades.NoticiaSensacine;
+import com.nestorcosta.xml.utilidades.InternetUtils;
 
 /**
  * Hello world!
@@ -107,9 +108,6 @@ public class App
 				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 					Element eElement = (Element) nNode;
 					// añado cada asignatura a la lista
-					if(eElement.getElementsByTagName("dc:creator").getLength()>0) {
-						
-					}
 					resultado.add(new NoticiaMarca(
 							eElement.getElementsByTagName("title").item(0).getTextContent(),
 							eElement.getElementsByTagName("description").item(0).getTextContent(),
@@ -142,16 +140,13 @@ public class App
 				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 					Element eElement = (Element) nNode;
 					// añado cada asignatura a la lista
-					if(eElement.getElementsByTagName("author").getLength()>0) {
-						
-					}
 					resultado.add(new NoticiaSensacine(
 							eElement.getElementsByTagName("category").item(0).getTextContent(),
 							eElement.getElementsByTagName("title").item(0).getTextContent(),
 							eElement.getElementsByTagName("description").item(0).getTextContent(),
-							(eElement.getElementsByTagName("author").item(0).getAttributes().getNamedItem("name").getTextContent()),
+							eElement.getElementsByTagName("author").item(0).getAttributes().getNamedItem("name").getTextContent(),
 							eElement.getElementsByTagName("guid").item(0).getTextContent(),
-							LocalDate.parse(eElement.getElementsByTagName("pubDate").item(0).getTextContent(),DateTimeFormatter.RFC_1123_DATE_TIME)				
+							LocalDate.parse(eElement.getElementsByTagName("pubDate").item(0).getTextContent(),DateTimeFormatter.RFC_1123_DATE_TIME)					
 							));
 				}
 			}
@@ -162,6 +157,8 @@ public class App
 		return resultado;
 		
 	}
+
+	
 	
     public static void main( String[] args )
     {
@@ -172,24 +169,33 @@ public class App
     		.filter(e->e.getCurso().equals("Segundo"))
     		.forEach(e->System.out.println(e));*/
     	
-//    	List<NoticiaMarca> noticias = devolverNoticiasMarca("https://e00-marca.uecdn.es/rss/futbol/futbol-femenino.xml");
-//    	//noticias.forEach(e->System.out.println(e));
-//    	noticias.addAll(devolverNoticiasMarca("https://e00-marca.uecdn.es/rss/futbol/primera-division.xml"));
-//    	noticias.addAll(devolverNoticiasMarca("https://e00-elmundo.uecdn.es/elmundo/rss/portada.xml"));
-//    	noticias.addAll(devolverNoticiasMarca("https://www.informacion.es/rss/section/7034"));
-//    	System.out.println("Introduzca el filtro para las noticias:");
-//    	String filtro = sc.nextLine();
-//    	noticias.stream()
-//    		.filter(e->e.getTitle().contains(filtro))
-//    		.forEach(e->System.out.println(e.getTitle()));
-//    	
-//    	sc.close();
-    		 
-    	List<NoticiaSensacine> noticias = devolverNoticiasSensacine("https://www.sensacine.com/rss/noticias-cine.xml");
+    	/*
+    	List<NoticiaMarca> noticias = devolverNoticiasMarca("https://e00-marca.uecdn.es/rss/futbol/futbol-femenino.xml");
+    	//noticias.forEach(e->System.out.println(e));
+    	noticias.addAll(devolverNoticiasMarca("https://e00-marca.uecdn.es/rss/futbol/primera-division.xml"));
+    	noticias.addAll(devolverNoticiasMarca("https://e00-elmundo.uecdn.es/elmundo/rss/portada.xml"));
+    	noticias.addAll(devolverNoticiasMarca("https://www.informacion.es/rss/section/7034"));
+    	System.out.println("Introduzca el filtro para las noticias:");
+    	String filtro = sc.nextLine();
     	noticias.stream()
-    	.filter(e->e.getPubDate().equals(LocalDate.now().minusDays(1)))
+    		.filter(e->e.getTitle().contains(filtro))
+    		.forEach(e->System.out.println(e.getTitle()));
+    	*/
+    	
+    	/*
+    	List<NoticiaSensacine> noticias = devolverNoticiasSensacine("https://www.sensacine.com/rss/noticias.xml");
+    	noticias.stream()
+    	//.filter(e->e.getPubDate().equals(LocalDate.now().minusDays(1)))   // Coge las noticias de ayer 	
+    	.filter(e->e.getPubDate().equals(LocalDate.now()))   // Coge las noticias de hoy 	
     	.forEach(e->System.out.println(e));
+    	*/
+    	
+    	List<String> lineasHtml = InternetUtils.readUrlList("https://www.chollometro.com/");
+    	lineasHtml.stream()
+    		.forEach(e->System.out.println(e));
+    	
     	
     	sc.close();
+    		    	
     }
 }

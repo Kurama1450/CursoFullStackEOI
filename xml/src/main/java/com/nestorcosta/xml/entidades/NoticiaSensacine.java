@@ -12,11 +12,9 @@ public class NoticiaSensacine {
 	private String guid;
 	private LocalDate pubDate;
 	
-	
 	public NoticiaSensacine() {
 		
 	}
-
 
 	public NoticiaSensacine(String category, String title, String description, String author, String guid,
 			LocalDate pubDate) {
@@ -29,66 +27,53 @@ public class NoticiaSensacine {
 		this.pubDate = pubDate;
 	}
 
-
 	public String getCategory() {
 		return category;
 	}
-
 
 	public void setCategory(String category) {
 		this.category = category;
 	}
 
-
 	public String getTitle() {
 		return title;
 	}
-
 
 	public void setTitle(String title) {
 		this.title = title;
 	}
 
-
 	public String getDescription() {
 		return description;
 	}
-
 
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
-
 	public String getAuthor() {
 		return author;
 	}
-
 
 	public void setAuthor(String author) {
 		this.author = author;
 	}
 
-
 	public String getGuid() {
 		return guid;
 	}
-
 
 	public void setGuid(String guid) {
 		this.guid = guid;
 	}
 
-
 	public LocalDate getPubDate() {
 		return pubDate;
 	}
 
-
 	public void setPubDate(LocalDate pubDate) {
 		this.pubDate = pubDate;
 	}
-
 
 	@Override
 	public String toString() {
@@ -96,12 +81,10 @@ public class NoticiaSensacine {
 				+ ", author=" + author + ", guid=" + guid + ", pubDate=" + pubDate + "]";
 	}
 
-
 	@Override
 	public int hashCode() {
 		return Objects.hash(guid);
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
