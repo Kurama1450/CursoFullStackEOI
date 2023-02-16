@@ -186,6 +186,10 @@ public class App
 //    	sc.close();
     		 
     	List<NoticiaSensacine> noticias = devolverNoticiasSensacine("https://www.sensacine.com/rss/noticias-cine.xml");
-    	noticias.forEach(e->System.out.println(e));
+    	noticias.stream()
+    	.filter(e->e.getPubDate().equals(LocalDate.now().minusDays(1)))
+    	.forEach(e->System.out.println(e));
+    	
+    	sc.close();
     }
 }
