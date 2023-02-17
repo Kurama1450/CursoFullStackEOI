@@ -9,117 +9,135 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.Set;
+
+import com.nestorcosta.ejercicioFicherosyFechas.modelos.Cuenta;
 
 public class Usos {
 
-	final private static String route = "dates";
+	final private static String route = "ficheros";
 	
 	private static Path getRouteFiles(String nameFichero) {//Creamos un metodo para obtener la ruta y los ficheros que tiene dentro.
 		return Paths.get(route,nameFichero);
 	}
 	
-	public static String[] buscarCliente(String nameFichero, String dni) {
-		Path info = getRouteFiles(nameFichero);
+	public static Map<String,Cuenta>getMap(String nameFichero){
+		Path archivo = getRouteFiles(nameFichero);
+		Map<String,Cuenta> datesCliente = new HashMap<>();
 		try {
-			List<String> lines = Files.readAllLines(info);
-			for(String line : lines) {
-				String[] infoCliente = line.split(";");//Delimitamos el separador
-				if(infoCliente[0].equals(dni)) return infoCliente;
+			List<String> lines = Files.readAllLines(archivo);
+			for(String line:lines) {
+				List<String> datesLines = new ArrayList<>(Arrays.asList(line.split(";")));
+				datesCliente.put(datesLines.get(0),
+						new Cuenta(datesLines.get(1),
+								LocalDate.parse(datesLines.get(2), DateTimeFormatter.ofPattern("dd/MM/yyyy")),
+								datesLines.get(3),
+								Double.parseDouble(datesLines.get(4))));
 			}
-		} catch(NoSuchFileException e) {
-			System.err.println("No se encuentra el archivo seleccionado " +e.getMessage());
+		} catch (NoSuchFileException e) {
+			System.err.println("No existe el archivo " +e.getMessage());
 		} catch (IOException e) {
-			System.err.println("Ha habido un error al leer el archivo " + info);
+			System.err.println("Error al leer el archivo " +archivo);
 		}
-		return null;
-	}
-	
-	public static void bienvenida(String[] dates) {
-		String name_cliente = dates[1];
-		String code_country = dates[3];
-		if(code_country.equals("ES")) 
-			System.out.println("Bienvenid@ " +name_cliente);
-		else 
-			System.out.println("Welcome " +name_cliente);
-	}
-	
-	public static void dateFomat(String[] dates) {
-		String code_country = dates[3];
-		if(code_country.equals("ES"))
-			System.out.println(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")));
-		else 
-			System.out.println(LocalDateTime.now().format(DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm:ss")));
 		
-		//Cambiamos para que la fecha sea la actual de lanzarse el programa.
-		//Damos la vista con el formato de Ingles.
+		return datesCliente;
 	}
 	
-	public static LocalDate dateBirthday(String[] dates) {
-		return LocalDate.parse(dates[2], DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+	public static void bienvenida(Map<String,Cuenta> datesClientes,String dni) {
+		String nameCliente = datesClientes.get(dni).getNombre_cliente();
+		String countryCode = datesClientes.get(dni).getCodigo_pais();
+		if(countryCode.equals("ES")) {
+			System.out.println("Bienvenido/a " +nameCliente);
+			String fecha = LocalDateTime.now().format(DateTimeFormatter.ofPattern("eeee',' dd 'de' MMMM 'de' yyyy\n'Hora: 'HH:mm:ss")).toString();
+			System.out.println(fecha.toUpperCase().charAt(0)+ fecha.substring(1, fecha.length()));
+		} 
+		else {
+			System.out.println("Welcome " +nameCliente);
+			System.out.println(LocalDateTime.now().format(DateTimeFormatter.ofPattern("eeee',' MMMM dd',' yyyy\n'Time: 'HH:mm:ss", Locale.UK)));
+		}
 	}
 	
-	public static boolean sameDate(LocalDate dateCaixa, LocalDate dateSabadell, LocalDate dateSantander) {
-		if(dateCaixa.equals(dateSabadell) && dateCaixa.equals(dateSantander) && dateSabadell.equals(dateSantander))
-			return true;
-		else
-			return false;
+	private static LocalDate dateBirthday(Map<String,Cuenta> datesCliente, String dni) {
+		return datesCliente.get(dni).getFechaNacimientoCliente();
 	}
 	
-	public static List<LocalDate> compareDates(LocalDate dateCaixa, LocalDate dateSabadell, LocalDate dateSantander) {
-		List<LocalDate> fechasElegir = new ArrayList<LocalDate>();
-		if(dateCaixa.equals(dateSabadell) || dateSantander.equals(dateSabadell))
-			Collections.addAll(fechasElegir, dateCaixa, dateSantander);
-		else if(dateCaixa.equals(dateSantander))
-			Collections.addAll(fechasElegir, dateCaixa,dateSabadell);
-		else 
-			Collections.addAll(fechasElegir, dateCaixa,dateSabadell,dateSantander);
+	public static Set<LocalDate> datesBirthday(Map<String,Cuenta> datesCaixa, Map<String,Cuenta> datesSabadell, Map<String,Cuenta> datesSantander, String dni){
+		Set<LocalDate> naci = new HashSet<>();
+		Collections.addAll(naci, dateBirthday(datesCaixa, dni), dateBirthday(datesSabadell, dni), dateBirthday(datesSantander, dni));
+		return naci;
+	}
+	
+	public static LocalDate correctDay(Set<LocalDate> datesBirthday, Scanner sc) {
+		if(datesBirthday.size() != 1) {
+			System.out.println("Se han encontrado diferentes fechas de nacimiento en sus cuentas:");
+			datesBirthday.forEach(e->System.out.println(e.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))));
+			System.out.print("Eliga cuál de ellas es la correcta: ");
+			return LocalDate.parse(sc.nextLine(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+		}
+		else return ((LocalDate[]) datesBirthday.toArray(new LocalDate[0]))[0];
 		
-		return fechasElegir;
+		
 	}
 	
-	public static double sumarSaldos(String[] datesCaixa, String[] datesSabadell, String[] datesSantander) {
-		return Double.parseDouble(datesCaixa[4])+Double.parseDouble(datesSabadell[4])+Double.parseDouble(datesSantander[4]);
+	public static double addSaldos(Map<String,Cuenta> datesCaixa, Map<String,Cuenta> datesSabadell, Map<String,Cuenta> datesSantander, String dni) {
+		return datesCaixa.get(dni).getSaldo()+datesSabadell.get(dni).getSaldo()+datesSantander.get(dni).getSaldo();
 	}
 	
-	public static List<String> buscarProducts(String nameFichero, int edad, double saldo){
-		Path files = getRouteFiles(nameFichero);
+	public static List<String> encontrarProduct(String nameFichero, int edad, double saldo){
+		Path file = getRouteFiles(nameFichero);
 		List<String> products = new ArrayList<String>();
 		try {
-			List<String> lines = Files.readAllLines(files);
+			List<String> lines = Files.readAllLines(file);
 			for(String line:lines) {
-				String[] datesProduct = line.split(";");
-				int dateMin = Integer.parseInt(datesProduct[0]);
-				int dateMax = Integer.parseInt(datesProduct[1]);
-				double soldMin = Double.parseDouble(datesProduct[2]);
-				double soldMax = Double.parseDouble(datesProduct[3]);
-				if(dateMin <= edad && edad <= dateMax && soldMin<=saldo && saldo<=soldMax) {
-					products.add(datesProduct[2]);
-					products.add(datesProduct[4]);
+				List<String> datesProducts = new ArrayList<>(Arrays.asList(line.split(";")));
+				int pMin = Integer.parseInt(datesProducts.get(0));
+				int pMax = Integer.parseInt(datesProducts.get(1));
+				double salMin = Double.parseDouble(datesProducts.get(2));
+				double salMax = Double.parseDouble(datesProducts.get(3));
+				if(pMin<=edad && edad<=pMax && salMin<=saldo && saldo<=salMax) {
+					products.add(datesProducts.get(2));
+					products.add(datesProducts.get(4));
+					
 				}
 			}
-			return products;
 			
-		} catch(NoSuchFileException e) {
-			System.err.println("No se encuentra el archivo seleccionado " +e.getMessage());
+			return products;
+		} catch (NoSuchFileException e) {
+			System.err.println("No existe el archivo " +e.getMessage());
 		} catch (IOException e) {
-			System.err.println("Ha habido un error al leer el archivo " + files);
+			System.err.println("Error al leer el archivo " +file);
 		}
 		return null;
 	}
 	
-	public static List<Double> listSaldosMini(List<String> products){
-		List<Double> saldoMini = new ArrayList<Double>();
-		for(int i = 0; i<products.size(); i++) {
-			saldoMini.add(Double.parseDouble(products.get(i)));
+	private static List<Double> listSaldosMin(List<String> products){
+		List<Double> saldMin = new ArrayList<Double>();
+		for(int i=0; i<products.size();i++) {
+			saldMin.add(Double.parseDouble(products.get(i)));
 			products.remove(i);
 		}
-		
-		return saldoMini;
+		return saldMin;
 	}
 	
-	public static double saldoMiniMayor(List<Double> saldosMini) {
-		return Collections.max(saldosMini);
+	private static double saldMinMasAlto(List<Double> saldMin) {
+		return Collections.max(saldMin);
+	}
+	
+	public static String ofrecerProduct(List<String> products) {
+		if(products.size() != 0) {
+			List<Double> saldMin = listSaldosMin(products);
+			String product = products.get(0);
+			if(products.size() != 1) product = products.get(saldMin.indexOf(saldMinMasAlto(saldMin)));
+			return "¿Se encuentra interesado en "+product+"?";
+		}
+		else return "Lo sentimos. Actualmente no tenemos un producto que esta buscando";
 	}
 }
