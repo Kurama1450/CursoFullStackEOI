@@ -2,6 +2,7 @@ package com.nestorcosta.programacionFuncional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.OptionalDouble;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -130,6 +131,32 @@ public class App
     			
     }
 	
+	public static void find() {//Busca dentro de la lista
+		//Final
+		//Quédate con el primer usuario que gane másde 45000 de sueldo
+		//Con Optional
+		Optional<Usuario> usuario = usuarios.stream()
+		.filter(e->e.getSueldo()>45000)
+		.findFirst();
+		if(usuario.isPresent())
+			System.out.println("El primer usuario que gana más de 45000 es: " +usuario.get().getNombre());
+		else
+			System.out.println("Nadie gana esa cantidad");
+		
+		//Sin optional
+		Usuario usuario2 = usuarios.stream()
+				.filter(e->e.getSueldo()>45000)
+				.findFirst().orElse(null);
+		if(usuario2!=null)
+			System.out.println(usuario2.getNombre());
+		
+		Usuario usuario3 = usuarios.stream()
+				.filter(e->e.getSueldo()>45000)
+				.findFirst().orElse(new Usuario(1,"Sin datos",0));
+		
+			System.out.println(usuario3.getNombre());
+	}
+	
     public static void main( String[] args )
     {
     	poblar();//Dar datos iniciales
@@ -137,7 +164,8 @@ public class App
     	//filter();
     	//map();
     	//toSet();
-    	sumAVG();
+    	//sumAVG();
+    	find();
     }
     
     
