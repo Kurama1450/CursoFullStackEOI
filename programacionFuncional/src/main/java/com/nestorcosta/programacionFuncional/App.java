@@ -2,6 +2,8 @@ package com.nestorcosta.programacionFuncional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.OptionalDouble;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.nestorcosta.programacionFuncional.entidades.Usuario;
@@ -66,10 +68,77 @@ public class App
 		ricos.forEach(e->System.out.println(e));
 	}
 	
+	public static void map() {//A partir de una lista nos quedamos con parte de los objetos.
+		//No final
+		//Crea una lista con los nombres de los usuarios
+		List<String> nombres = usuarios.stream().map(e->e.getNombre())//Se queda solamente con los nombres
+		.collect(Collectors.toList());
+		
+		nombres.forEach(e->System.out.println(e));
+		
+		//Crea una lista de los ids de los usuarios que ganen más de 40000.
+		 usuarios.stream()
+		.filter(e->e.getSueldo()>40000)
+		.mapToInt(e->e.getId())//Me quedo con los ids
+		.filter(e->e<6)//Aqui recorremos ids no usuarios
+		.forEach(e->System.out.println(e));
+		 
+		 //Crea una lista de los nombres distintos
+		 Set<String> nombresDistintos = usuarios.stream()
+				 .map(e->e.getNombre())//Se queda solamente con los nombres
+				 .collect(Collectors.toSet());
+				System.out.println("Nombres distintos");
+				nombresDistintos.forEach(e->System.out.println(e));
+	}
+	
+	public static void toSet() {//Creacion de listas de elementos no duplicados
+		//Final
+		Set<Usuario> usuariosDistintos = usuarios.stream()
+		.collect(Collectors.toSet());
+		usuariosDistintos.forEach(e->System.out.println(e));
+	}
+	
+	public static void sumAVG() {//Sum suma todos los valores, Average saca la media
+		//Finales
+		//Suma de todos los sueldos.
+    	double sumaSueldos = usuarios.stream()
+    	.mapToDouble(e->e.getSueldo())//Me quedo solo con los sueldos y los sumo
+    	.sum();
+    	System.out.println("La suma de todos los sueldos es: " +sumaSueldos);
+    	
+    	//Media de los sueldos
+    	//Los Optinal son datos que pueden contener valor o no.
+    	OptionalDouble mediaOpcional = usuarios.stream()
+    	.mapToDouble(e->e.getSueldo())
+    	.average();
+    	System.out.println("La media de todos los sueldos es: " +mediaOpcional.getAsDouble());
+    	
+    	descargar();
+    	OptionalDouble mediaOpcional2 = usuarios.stream()
+    	    	.mapToDouble(e->e.getSueldo())
+    	    	.average();
+    			if(mediaOpcional2.isPresent())
+    				System.out.println("La media de todos los sueldos es: " +mediaOpcional2.getAsDouble());
+    			else
+    				System.out.println("La lista esta vacia y por lo tanto no hay media");
+    			
+    			poblar();
+    			double mediaSegura = usuarios.stream()
+    					.mapToDouble(e->e.getSueldo())
+    					.average().orElse(0);//Da valor por defecto en caso de estar la lista vacia
+    			System.out.println("La media segura es: " + mediaSegura);
+    			
+    }
+	
     public static void main( String[] args )
     {
     	poblar();//Dar datos iniciales
         //forEach();//Luego recorrerla
-    	filter();
+    	//filter();
+    	//map();
+    	//toSet();
+    	sumAVG();
     }
+    
+    
 }
