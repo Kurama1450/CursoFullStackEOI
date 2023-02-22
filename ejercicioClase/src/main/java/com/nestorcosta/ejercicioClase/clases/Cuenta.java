@@ -5,7 +5,7 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public abstract class Cuenta {
+public abstract class Cuenta {//No se puede instanciar por eso es abstracta
 
 	final private static String ruta = "ficheros";
 	
