@@ -340,6 +340,33 @@ public class App
 		
 		System.out.println(nombresDistintosMinusculasOrdenadosSeparadosComas);
 	}
+	/**
+	 * Es igual a stream pero utilizando procesamiento paralelo. 
+	 * Nos aprovechamos de los nucleos de nuestro ordeandor.
+	 */
+	public static void parallelStream() {
+		long tiempoInicial = System.currentTimeMillis();
+		usuarios.forEach(e->convertirMayusculas(e.getNombre()));
+		long tiempoFinal = System.currentTimeMillis();
+		System.out.println("El tiempo de la operación ha sido: " +(tiempoFinal-tiempoInicial));
+		
+		//En paralelo
+		tiempoInicial = System.currentTimeMillis();
+		usuarios.parallelStream().forEach(e->convertirMayusculas(e.getNombre()));
+		tiempoFinal = System.currentTimeMillis();
+		System.out.println("El tiempo de la operación en paralelo ha sido: " +(tiempoFinal-tiempoInicial));
+	}
+	
+	public static String convertirMayusculas(String nombre) {
+		//Este metodo que simula una operacion que tarda un segundo y pico en realizarse.
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return nombre.toUpperCase();
+	}
 	
     public static void main( String[] args )
     {
@@ -361,7 +388,8 @@ public class App
     	//match();
     	//summarizingDouble();
     	//reduce();
-    	joining();
+    	//joining();
+    	parallelStream();
     }
     
     
