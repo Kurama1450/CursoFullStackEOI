@@ -2,6 +2,8 @@ package com.nestorcosta.programacionFuncional;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.DoubleSummaryStatistics;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -217,6 +219,100 @@ public class App
 		}
 	}
 	
+	public static void count() {//Cuenta el numero de elementos.
+		//Final
+		Long numRicos = usuarios.stream()
+				.filter(e->e.getSueldo()>40000)
+				.count();
+		System.out.println("El numero de ricos son: " +numRicos);
+	}
+	
+	public static void skipYLimit() {//Skip sirve para saltar resultados y el limit para limitar el numero de resultados.
+		//No son finales
+		
+		//Saca los usuarios 3,4 y 5 que más ganan de la empresa.
+		usuarios.stream()
+		.sorted(Comparator.comparingDouble(Usuario::getSueldo).reversed())//Ordeno los usuarios por sueldo en orden de mayor a menor.
+		.skip(2) //Saltate los dos primeros
+		.limit(3) //Limitate a devolverle solamente 3 usuarios
+		.forEach(e->System.out.println(e));
+	}
+	
+	public static void maxMin() {//Devolverian el maximo y el minimo en base a un criterio de comparacion
+		//Queremos obtener el usuario con id más bajo y el de id más alto de la lista de usuarios.
+		Optional<Usuario> masgana = usuarios.stream()
+		.max(Comparator.comparingInt(Usuario::getId));
+		if(masgana.isPresent())
+			System.out.println("El usuario con ID más alto es: " +masgana.get().getNombre());
+		
+		Optional<Usuario> menosgana = usuarios.stream()
+				.min(Comparator.comparingInt(Usuario::getId));
+				if(menosgana.isPresent())
+					System.out.println("El usuario con ID más bajo es: " +menosgana.get().getNombre());
+	}
+	
+	public static void distinct() {//Saca elementos distintos de la lista
+		//No final
+		
+		//¿Cuantos usuarios distintos hay?
+		System.out.println("El numero de usuarios distintos es: " +usuarios.stream().distinct().count());
+		
+		//Obten una lista a partir de la original eliminando los duplicados.
+		List<Usuario> usuariosDistintos = usuarios.stream()
+		.distinct()
+		.collect(Collectors.toList());
+		
+		//Dime los distintos sueldos que hay en la empresa.
+		System.out.println("La lista de sueldos distintos es: ");
+		usuarios.stream()
+		.mapToDouble(Usuario::getSueldo)
+		.sorted()
+		.distinct()
+		.forEach(e->System.out.println(e));
+		
+		//Dime los diferentes nombres de los empleados
+		System.out.println("La lista de nombres distintos es: ");
+		usuarios.stream()
+		.map(e->e.getNombre())
+		.distinct()
+		.forEach(e->System.out.println(e));
+	}
+	/**
+	 * Todos devuelven booleanos.
+	 *  anyMatch . True si existe alguno que cumpla la condición.
+	 *  allMatch.True si todos cumplen con la condicion.
+	 *  noneMatch.True si ninguno cumple la condicion.
+	 */
+	public static void match() {
+		//Finales
+		
+		//Existe algún usuario que gane más de 100000 Euros?
+		boolean alguienSuperRico = usuarios.stream()
+		.anyMatch(e->e.getSueldo()>100000);
+		
+		//Todos ganan un sueldo positivo
+		boolean todosCobran = usuarios.stream()
+				.allMatch(e->e.getSueldo()>0);
+		
+		//No hay nadie que gane menos de 0?
+		boolean todosCobran2 = usuarios.stream()
+				.noneMatch(e->e.getSueldo()<0);
+		
+		System.out.println(alguienSuperRico + " " + todosCobran + " " +todosCobran2);
+	}
+	
+	public static void summarizingDouble() {//Saca valores estadísticos para campos numericos
+		//Final
+		DoubleSummaryStatistics estadisticas = usuarios.stream()
+		.collect(Collectors.summarizingDouble(Usuario::getSueldo));
+		
+		System.out.println("Media: " +estadisticas.getAverage());
+		System.out.println("Sueldo Máximo: " +estadisticas.getMax());
+		System.out.println("Sueldo Mínimo: " +estadisticas.getMin());
+		System.out.println("Suma: " +estadisticas.getSum());
+		System.out.println("Número: " +estadisticas.getCount());
+	}
+	
     public static void main( String[] args )
     {
     	poblar();//Dar datos iniciales
@@ -229,7 +325,13 @@ public class App
     	//flatMap();
     	//peek();
     	//partitioningBy();
-    	groupingBy();
+    	//groupingBy();
+    	//count();
+    	//skipYLimit();
+    	//maxMin();
+    	//distinct();
+    	//match();
+    	summarizingDouble();
     }
     
     
