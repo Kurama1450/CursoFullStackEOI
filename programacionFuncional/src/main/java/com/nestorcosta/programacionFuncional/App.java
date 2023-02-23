@@ -313,6 +313,34 @@ public class App
 		System.out.println("Número: " +estadisticas.getCount());
 	}
 	
+	public static void reduce() {//Cuando quieres reducir los datos que tengamos a un UNICO valor.
+		//Final
+		
+		//Multiplica todos los ids
+		int idMultiplicados = usuarios.stream()
+		.mapToInt(e->e.getId())
+		.reduce(1, (a,b)->a*b);
+		
+		System.out.println("La multiplicación de los ids es: " + idMultiplicados);
+		
+		//Crea una variable con todos los nombres de los usuarios, uno en cada línea.
+		String dosPrimerasLetras = usuarios.stream()
+		.map(e->e.getNombre())
+		.reduce("",(a,b)->a.concat(b).concat("\n"));
+		System.out.println(dosPrimerasLetras);
+	}
+	
+	public static void joining() {//Une elementos y le puedes poner un separador
+		//Final
+		String nombresDistintosMinusculasOrdenadosSeparadosComas = usuarios.stream()
+				.map(e->e.getNombre().toLowerCase())
+				.distinct()
+				.sorted()
+				.collect(Collectors.joining(", "));
+		
+		System.out.println(nombresDistintosMinusculasOrdenadosSeparadosComas);
+	}
+	
     public static void main( String[] args )
     {
     	poblar();//Dar datos iniciales
@@ -331,7 +359,9 @@ public class App
     	//maxMin();
     	//distinct();
     	//match();
-    	summarizingDouble();
+    	//summarizingDouble();
+    	//reduce();
+    	joining();
     }
     
     
