@@ -132,7 +132,7 @@ public class JsonUtils {
 		return resultado;
 	}
 	
-	//
+	//Leer cualquier JSON y crear una lista de cualquier clase.
 	public static <T> List<T> leerObjetos(String comienzoCadena, int numInicio,int numFin, String finCadena,Class<T> clase){
 		List<T> resultado = new ArrayList<T>();
 		for(int i = numInicio;i<=numFin;i++) {
@@ -145,7 +145,7 @@ public class JsonUtils {
 		return new Gson().fromJson(InternetUtils.readUrl(url), Films.class);
 	}
 	
-	//Metodo genérico.
+	//Metodo genérico.Leer cualquier JSON.
 	public static <T> T leerObjeto(String url,Class<T> clase) {
 		return new Gson().fromJson(InternetUtils.readUrl(url), clase);
 	}
