@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -131,6 +132,7 @@ public class JsonUtils {
 		return resultado;
 	}
 	
+	//
 	public static <T> List<T> leerObjetos(String comienzoCadena, int numInicio,int numFin, String finCadena,Class<T> clase){
 		List<T> resultado = new ArrayList<T>();
 		for(int i = numInicio;i<=numFin;i++) {
@@ -143,8 +145,12 @@ public class JsonUtils {
 		return new Gson().fromJson(InternetUtils.readUrl(url), Films.class);
 	}
 	
-	//Metodo genérico
+	//Metodo genérico.
 	public static <T> T leerObjeto(String url,Class<T> clase) {
 		return new Gson().fromJson(InternetUtils.readUrl(url), clase);
+	}
+	//Leer cualquier array.
+	public static <T> List<T> devolverArrayGenerico(String url, Class<T[]> clase){
+		return Arrays.asList(new Gson().fromJson(InternetUtils.readUrl(url), clase));
 	}
 }
