@@ -118,9 +118,7 @@ public class JsonUtils {
 	//Hace lo mismo que los metodos anteriores.
 	public static People leerPersonaje(String url) {
 		
-		
 		return new Gson().fromJson(InternetUtils.readUrl(url), People.class);
-		
 		
 	}
 }
