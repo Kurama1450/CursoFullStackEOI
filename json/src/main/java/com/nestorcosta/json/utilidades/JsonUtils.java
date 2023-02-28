@@ -13,6 +13,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import com.google.gson.Gson;
+import com.nestorcosta.json.entidades.People;
 import com.nestorcosta.json.entidades.Posts;
 
 public class JsonUtils {
@@ -112,5 +114,13 @@ public class JsonUtils {
 			return null;
 		}
 	}
-	
+
+	//Hace lo mismo que los metodos anteriores.
+	public static People leerPersonaje(String url) {
+		
+		
+		return new Gson().fromJson(InternetUtils.readUrl(url), People.class);
+		
+		
+	}
 }
