@@ -14,6 +14,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import com.google.gson.Gson;
+import com.nestorcosta.json.entidades.Films;
 import com.nestorcosta.json.entidades.People;
 import com.nestorcosta.json.entidades.Posts;
 
@@ -128,5 +129,14 @@ public class JsonUtils {
 			resultado.add(leerPersonaje(comienzoCadena+ i + finCadena));
 		}
 		return resultado;
+	}
+
+	public static Films leerFilm(String url) {
+		return new Gson().fromJson(InternetUtils.readUrl(url), Films.class);
+	}
+	
+	//Metodo genérico
+	public static <T> T leerObjeto(String url,Class<T> clase) {
+		return new Gson().fromJson(InternetUtils.readUrl(url), clase);
 	}
 }

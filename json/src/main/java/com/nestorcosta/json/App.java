@@ -3,6 +3,7 @@ package com.nestorcosta.json;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.nestorcosta.json.entidades.Films;
 import com.nestorcosta.json.entidades.People;
 import com.nestorcosta.json.entidades.Posts;
 import com.nestorcosta.json.utilidades.JsonUtils;
@@ -28,7 +29,17 @@ public class App
     	//System.out.println(Luke);
     	
     	//Leer lista de Personajes
-    	List<People> personajes1al10=JsonUtils.leerPersonajes("https://swapi.dev/api/people/", 1, 10, "?format=json");
-    	personajes1al10.forEach(e->System.out.println(e));
+    	//List<People> personajes1al10=JsonUtils.leerPersonajes("https://swapi.dev/api/people/", 1, 10, "?format=json");
+    	//personajes1al10.forEach(e->System.out.println(e));
+    	//Devolver pelicula
+    	/*
+    	Films pelicula = JsonUtils.leerFilm("https://swapi.dev/api/films/1?format=json");
+    	System.out.println(pelicula);*/
+    	
+    	People Luke = JsonUtils.leerObjeto("https://swapi.dev/api/people/1?format=json", People.class);
+    	Films pelicula = JsonUtils.leerObjeto("https://swapi.dev/api/films/1?format=json", Films.class);
+    	System.out.println(Luke);
+    	System.out.println(pelicula);
+    	
     }
 }
