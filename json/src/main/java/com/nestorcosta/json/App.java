@@ -42,15 +42,22 @@ public class App
     	System.out.println(pelicula);*/
     	
     	//Leer lista de peliculas utilizando genérico
-    	List<Films> peliculas = JsonUtils.leerObjetos("https://swapi.dev/api/films/", 1, 5, "?format=json", Films.class);
-    	peliculas.forEach(e->System.out.println(e));
+    	//List<Films> peliculas = JsonUtils.leerObjetos("https://swapi.dev/api/films/", 1, 5, "?format=json", Films.class);
+    	//peliculas.forEach(e->System.out.println(e));
     	//Leer lista de personajes utilizando genérico
-    	List<People> personajes = JsonUtils.leerObjetos("https://swapi.dev/api/people/", 8, 14, "?format=json", People.class);
-    	personajes.forEach(e->System.out.println(e));
+    	//List<People> personajes = JsonUtils.leerObjetos("https://swapi.dev/api/people/", 8, 14, "?format=json", People.class);
+    	//personajes.forEach(e->System.out.println(e));
     	//Leer lista de publicaciones utilizando genérico
-        publicaciones = JsonUtils.devolverArrayGenerico("https://jsonplaceholder.typicode.com/posts",Posts[].class);
-        publicaciones.stream()
-        .filter(e->e.getId()%2==0)//publicaciones pares
-        .forEach(e->System.out.println(e));
+        //publicaciones = JsonUtils.devolverArrayGenerico("https://jsonplaceholder.typicode.com/posts",Posts[].class);
+        //publicaciones.stream()
+        //.filter(e->e.getId()%2==0)//publicaciones pares
+        //.forEach(e->System.out.println(e));
+        
+        //Crear un json usando genérico
+        Posts publicacion = new Posts(1,2,"Post de prueba","Contenido del post");
+        String json = JsonUtils.crearJson(publicacion);
+        System.out.println(json);
+        json = JsonUtils.crearJsonPretty(publicacion);
+        System.out.println(json);
     }
 }

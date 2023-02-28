@@ -15,6 +15,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.nestorcosta.json.entidades.Films;
 import com.nestorcosta.json.entidades.People;
 import com.nestorcosta.json.entidades.Posts;
@@ -152,5 +153,19 @@ public class JsonUtils {
 	//Leer cualquier array.
 	public static <T> List<T> devolverArrayGenerico(String url, Class<T[]> clase){
 		return Arrays.asList(new Gson().fromJson(InternetUtils.readUrl(url), clase));
+	}
+	//Creamos un String con un Json a partir de un objeto.
+	//<T> tipo del objeto
+	// object nombre de la variable.
+	// return String con el Json devuelto
+	public static <T> String crearJson(T object) {
+		return new Gson().toJson(object);
+	}
+	//Creamos un String con un Json a partir de un objeto.
+	//<T> tipo del objeto
+	// object nombre de la variable.
+	// return String con el Json devuelto
+	public static <T> String crearJsonPretty(T object) {
+		return new GsonBuilder().setPrettyPrinting().create().toJson(object);
 	}
 }
