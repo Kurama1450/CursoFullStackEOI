@@ -24,7 +24,11 @@ public class App
         //.forEach(e->System.out.println(e));
     	
     	//Leer personaje con gson
-    	People Luke = JsonUtils.leerPersonaje("https://swapi.dev/api/people/1?format=json");
-    	System.out.println(Luke);
+    	//People Luke = JsonUtils.leerPersonaje("https://swapi.dev/api/people/1?format=json");
+    	//System.out.println(Luke);
+    	
+    	//Leer lista de Personajes
+    	List<People> personajes1al10=JsonUtils.leerPersonajes("https://swapi.dev/api/people/", 1, 10, "?format=json");
+    	personajes1al10.forEach(e->System.out.println(e));
     }
 }

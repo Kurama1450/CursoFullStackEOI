@@ -121,4 +121,12 @@ public class JsonUtils {
 		return new Gson().fromJson(InternetUtils.readUrl(url), People.class);
 		
 	}
+	
+	public static List<People> leerPersonajes(String comienzoCadena, int numInicio,int numFin, String finCadena){
+		List<People> resultado = new ArrayList<People>();
+		for(int i = numInicio;i<=numFin;i++) {
+			resultado.add(leerPersonaje(comienzoCadena+ i + finCadena));
+		}
+		return resultado;
+	}
 }
