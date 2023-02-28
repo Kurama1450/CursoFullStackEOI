@@ -130,6 +130,14 @@ public class JsonUtils {
 		}
 		return resultado;
 	}
+	
+	public static <T> List<T> leerObjetos(String comienzoCadena, int numInicio,int numFin, String finCadena,Class<T> clase){
+		List<T> resultado = new ArrayList<T>();
+		for(int i = numInicio;i<=numFin;i++) {
+			resultado.add(leerObjeto(comienzoCadena+ i + finCadena,clase));
+		}
+		return resultado;
+	}
 
 	public static Films leerFilm(String url) {
 		return new Gson().fromJson(InternetUtils.readUrl(url), Films.class);

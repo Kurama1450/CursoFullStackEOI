@@ -36,10 +36,17 @@ public class App
     	Films pelicula = JsonUtils.leerFilm("https://swapi.dev/api/films/1?format=json");
     	System.out.println(pelicula);*/
     	
-    	People Luke = JsonUtils.leerObjeto("https://swapi.dev/api/people/1?format=json", People.class);
+    	/*People Luke = JsonUtils.leerObjeto("https://swapi.dev/api/people/1?format=json", People.class);
     	Films pelicula = JsonUtils.leerObjeto("https://swapi.dev/api/films/1?format=json", Films.class);
     	System.out.println(Luke);
-    	System.out.println(pelicula);
+    	System.out.println(pelicula);*/
+    	
+    	//Leer lista de peliculas utilizando genérico
+    	List<Films> peliculas = JsonUtils.leerObjetos("https://swapi.dev/api/films/", 1, 5, "?format=json", Films.class);
+    	peliculas.forEach(e->System.out.println(e));
+    	List<People> personajes = JsonUtils.leerObjetos("https://swapi.dev/api/people/", 8, 14, "?format=json", People.class);
+    	personajes.forEach(e->System.out.println(e));
+    	
     	
     }
 }
