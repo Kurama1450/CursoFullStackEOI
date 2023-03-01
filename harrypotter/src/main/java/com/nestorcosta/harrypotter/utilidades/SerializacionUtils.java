@@ -11,6 +11,11 @@ import java.util.List;
 
 public class SerializacionUtils {
 	/**
+	 * Serializar es convertir información en una 
+	 * cadena de forma estándar para poder leer 
+	 * después esa cadena 
+	 * y obtener el mismo formato e 
+	 * informacion que era antes
 	 * Dada una ruta de un fichero y una lista de objetos a almacenar, los guarda en el fichero
 	 * @param <T> Clase genérica
 	 * @param rutaCompleta Ruta donde guardamos los objetos
