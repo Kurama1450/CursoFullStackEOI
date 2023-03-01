@@ -17,15 +17,25 @@ public class App
 {
 	static List<Personaje> personajes = new ArrayList<Personaje>();
 	
-    public static void main( String[] args )
-    {
-    	//Obtener los datos de la API
+	public static void ejemploSerializar() {
+		//Serialización la probamos
+        if(SerializacionUtils.serializarListaObjetos("personajes.dat", personajes)) {
+        	System.out.println("La serialización fue satisfactoria");
+        } else {
+        	System.out.println("Ha fallado");
+        }
+	}
+	
+	public static void obtenerDatosApi() {
+		//Obtener los datos de la API
         personajes = JsonUtils.devolverArrayGsonGenerico("https://hp-api.onrender.com/api/characters", Personaje[].class);
         personajes.stream()
         .filter(e->e.getName().equals("Harry Potter"))
         .forEach(e->System.out.println(e));
-        
-        //Rellenar el campo dateOfBirthLD
+	}
+	
+	public static void rellenarFechaNacLD() {
+		//Rellenar el campo dateOfBirthLD
         personajes.stream()
         .peek(e->{
         	if(e.getDateOfBirth()!=null) {
@@ -35,11 +45,23 @@ public class App
         .filter(e->e.getName().equals("Harry Potter"))
         .forEach(e->System.out.println(e));
         
-        //Serialización la probamos
-        if(SerializacionUtils.serializarListaObjetos("personajes.dat", personajes)) {
-        	System.out.println("La serialización fue satisfactoria");
-        } else {
-        	System.out.println("Ha fallado");
-        }
+	}
+	
+	public static void ejemploDesSerializar() {
+		personajes = SerializacionUtils.desSerializarListaObjetos("personajes.dat");
+	}
+	
+	public static void mostrarPersonajes() {
+		personajes.forEach(e->System.out.println(e));
+	}
+	
+    public static void main( String[] args )
+    {
+    	
+        //obtenerDatosApi();
+        //rellenarFechaNacLD();
+        //ejemploSerializar();
+        ejemploDesSerializar();
+        mostrarPersonajes();
     }
 }
