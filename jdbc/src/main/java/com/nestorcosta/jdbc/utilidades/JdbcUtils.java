@@ -2,11 +2,13 @@ package com.nestorcosta.jdbc.utilidades;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import com.nestorcosta.jdbc.entidades.Tabla1;
 
@@ -19,6 +21,7 @@ public class JdbcUtils {
 	
 	public static Connection con;
 	public static Statement st;
+	public static PreparedStatement ps;
 	public static ResultSet rs;
 	
 	/**
@@ -120,5 +123,71 @@ public class JdbcUtils {
 			e.printStackTrace();
 			return -1;
 		}
+	}
+	
+	public static void ejemploPreparedStatement() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Introduzca el nombre de la persona a borrar:");
+		String nombre = sc.nextLine();
+		try {
+			ps = con.prepareStatement("DELETE FROM tabla1 WHERE nombre LIKE ?");
+			ps.setString(1, nombre);  // Este método evita la inyección de código
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		sc.close();
+	}
+	
+	/**
+	 * Dada una sql y una lista de Objetos con sus parámetros a cambiar por las '?'
+	 * nos devuelve el ResultSet de los resultados al ejecutar la Select
+	 * @param sql String con la SQL con las '?' para que puedan bindeadas (enlazadas)
+	 * @param parametros Lista con los parámetros
+	 * @return ResultSet de la respuesta de la Select y null en caso de error
+	 */
+	public static ResultSet devolverResultSetPreparedStatement(String sql, List<Object> parametros) {
+		if(parametros.size()!=countMatches(sql, '?')) {  // No coinciden los parámetros con el número de parámetros esperado
+			return null;
+		}
+		try {
+			ps = con.prepareStatement(sql);
+			for(int i=1; i<=parametros.size();i++) {
+				ps.setObject(i, parametros.get(i-1));
+			}			
+			return ps.executeQuery();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}		
+	}
+	
+	
+	/**
+	 * Dada una sql y una lista de Objetos con sus parámetros a cambiar por las '?'
+	 * nos devuelve el ResultSet de los resultados al ejecutar la Select
+	 * @param sql String con la SQL con las '?' para que puedan bindeadas (enlazadas)
+	 * @param parametros Lista con los parámetros
+	 * @return número de registros afectados, -1 en caso de error
+	 */
+	public static int preparedStatementDML(String sql, List<Object> parametros) {
+		if(parametros.size()!=countMatches(sql, '?')) {  // No coinciden los parámetros con el número de parámetros esperado
+			return -1;
+		}
+		try {
+			ps = con.prepareStatement(sql);
+			for(int i=1; i<=parametros.size();i++) {
+				ps.setObject(i, parametros.get(i-1));
+			}			
+			return ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return -1;
+		}		
+	}
+	
+	
+	private static int countMatches(String sql, char caracterBuscado) {
+		return (int)sql.chars().filter(e->e==caracterBuscado).count();
 	}
 }

@@ -24,6 +24,25 @@ public class App
 		}
 	}
 	
+	
+	public static void cargarDatosTabla1PreparedStatement() {
+		String sql = "SELECT * FROM tabla1 WHERE id=? and nombre=?";
+		List<Object> parametros = new ArrayList<Object>();
+		parametros.add(5);
+		parametros.add("Fernando");
+		ResultSet rs = JdbcUtils.devolverResultSetPreparedStatement(sql, parametros);
+		if(rs!=null) {
+			try {
+				while(rs.next()) {  		 // mientras hay resultados, los vamos recorriendo
+					datos.add(new Tabla1(rs.getInt("id"),rs.getString("nombre")));  // Metería en la lista un elemento por cada registro que devuelve la consulta
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+    	
+	}
+	
 	public static void insertarDato() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Introduzca el nombre de la persona:");
@@ -49,6 +68,7 @@ public class App
 		System.out.println("Introduzca el nombre de la persona a borrar:");
 		String nombre = sc.nextLine();
 		// DELETE FROM tabla1 WHERE nombre LIKE 'Fran'
+		// Ejemplo de SQL injection
 		// DELETE FROM tabla1 WHERE nombre LIKE 'a' or 'a'='a'
 		int registros = JdbcUtils.statementDML("DELETE FROM tabla1 WHERE nombre LIKE '" + nombre + "'");
 		System.out.println("Se ha borrado " + registros + " registro");
@@ -63,6 +83,17 @@ public class App
 		String nombreModificado = sc.nextLine();
 		int registros = JdbcUtils.statementDML("UPDATE tabla1 SET nombre ='" + nombreModificado + "' WHERE nombre LIKE '" + nombre + "'");
 		System.out.println("Se ha actualizado " + registros + " registro");
+		sc.close();
+	}
+	
+	public static void borrarDatoPorIdPS() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Introduzca el código de la persona a borrar:");
+		int id = Integer.parseInt(sc.nextLine());
+		List<Object> parametros = new ArrayList<Object>();
+		parametros.add(id);
+		int registros = JdbcUtils.preparedStatementDML("DELETE FROM tabla1 WHERE id = ?",parametros);
+		System.out.println("Se ha borrado " + registros + " registro");
 		sc.close();
 	}
 	
@@ -85,8 +116,15 @@ public class App
         	//cargarDatosTabla1();
         	//insertarDato();
         	//borrarDatoPorId();
-        	borrarDatoPorNombre();
+        	//borrarDatoPorNombre();
         	//modificarDatoPorNombre();
+        	//JdbcUtils.ejemploPreparedStatement();
+        	/*
+        	cargarDatosTabla1PreparedStatement();
+        	datos.stream()
+    		.forEach(e->System.out.println(e.getNombre()));
+    		*/
+        	borrarDatoPorIdPS();
             JdbcUtils.desconexion();
         }
         
