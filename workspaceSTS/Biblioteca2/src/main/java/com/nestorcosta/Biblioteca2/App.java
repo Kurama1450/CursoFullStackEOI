@@ -52,6 +52,35 @@ public class App
 		trans.commit();
 	}
 	
+	public static void updateAutor(String nombreAntiguo, String nombreNuevo) {
+		// Busco que quiero actualizar
+		List<Autores> autores = session.createSelectionQuery("from Autores where nombre='" + nombreAntiguo + "'",Autores.class).list();
+		Transaction trans = session.beginTransaction();
+		autores.forEach(e->{
+			e.setNombre(nombreNuevo);
+			session.merge(e);  // Hibernate <6.0 era update
+		});  // Me actualiza los nombres en todos los resultados		
+		trans.commit();
+		session.clear();
+	}
+	
+	public static void deleteLibro(int id) {
+		List<Libros> libros = session.createSelectionQuery("from Libros where id=" + id ,Libros.class).list();
+		if(libros.size()>0) {  // Ha encontrado el libro con esa ID
+			Transaction trans = session.beginTransaction();
+			session.remove(libros.get(0));  // Hibernate <6.0 era delete
+			trans.commit();
+			session.clear();
+		} else {
+			System.out.println("No existe ese id a borrar");
+		}
+	}
+	
+	public static void closeSession() {
+		sessionFactory.close();
+		session.close();
+	}
+	
     public static void main( String[] args )
     {
 		java.util.logging.Logger.getLogger("org.hibernate").setLevel(java.util.logging.Level.SEVERE);
@@ -60,6 +89,8 @@ public class App
     	//mostrarAutores();
     	//ayadirAutor("AAAA", "Prueba", new HashSet<Libros>(0));
     	//ayadirLibro(6,new Autores("WSHAK"),"Libro Prueba");
-    	mostrarLibros();
+    	//mostrarLibros();
+    	updateAutor("Prueba", "Nombre Actualizado");
+    	//closeSession();
     }
 }
