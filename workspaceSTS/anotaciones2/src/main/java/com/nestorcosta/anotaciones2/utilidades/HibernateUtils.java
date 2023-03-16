@@ -36,19 +36,24 @@ public class HibernateUtils {
 			return false;
 		}
 	}
-	//? no sabe de que tipo es , devolvere una lista de algo.
-	//Metodo genérico Dado el nombre de una clase
-	//Devuelve una lista con todos los elementos que tiene.
-	//Usaremos este metodo en un proyecto < Hibernate 6.0
+	/**
+	 * Dado el nombre de una clase, devuelve una lista con todos los elementos que tiene.
+	 * Usaremos este método en un proyecto < Hibernate 6.0
+	 * <br>ex: HibernateUtils.devolverListaObjetos("Libros")
+	 * @param clase Nombre de la clase de la que queremos obtener todos los datos.
+	 * @return Lista con el equivalente a todas las filas de la tabla de ese nombre
+	 */
 	@SuppressWarnings("deprecation")
 	public static List<?> devolverListadeObjetos(String clase){
 		return session.createQuery("from " + clase).list();
 	}
 	/**
-	 * Dado el tipo de una clase , devuelve una lista con todos los elementos que tiene.
+	 * Dado el tipo de una clase, devuelve una lista con todos los elementos que tiene.
+	 * Usaremos este método en un proyecto >= Hibernate 6.0
+	 * <br> ex: HibernateUtils.devolverListaObjetos(Autores.class)
 	 * @param <T> Tipo de la clase
 	 * @param clase Clase pasada
-	 * @return Lista con el equivalente a todas las filas de la tabla de ese nombre.
+	 * @return Lista con el equivalente a todas las filas de la tabla de ese nombre
 	 */
 	public static <T> List<T> devolverListaObjetos(Class<T> clase){
 		return session.createSelectionQuery("from " + clase.getSimpleName(),clase).list();
