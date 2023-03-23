@@ -2,7 +2,7 @@ package com.nestorcosta.springboot.backend.eventos.models.entity;
 
 // Generated 23 mar 2023 10:08:39 by Hibernate Tools 4.3.6.Final
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -12,6 +12,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
@@ -32,14 +34,14 @@ public class Evento implements java.io.Serializable {
 	private String nombre;
 	private String descripcion;
 	private BigDecimal precio;
-	private Date fecha;
+	private LocalDate fecha;
 	@JsonIgnore
 	private Set<Usuario> usuarios = new HashSet<Usuario>(0);
 
 	public Evento() {
 	}
 
-	public Evento(int id, String nombre, String descripcion, BigDecimal precio, Date fecha) {
+	public Evento(int id, String nombre, String descripcion, BigDecimal precio, LocalDate fecha) {
 		this.id = id;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
@@ -47,7 +49,7 @@ public class Evento implements java.io.Serializable {
 		this.fecha = fecha;
 	}
 
-	public Evento(int id, String nombre, String descripcion, BigDecimal precio, Date fecha, Set<Usuario> usuarios) {
+	public Evento(int id, String nombre, String descripcion, BigDecimal precio, LocalDate fecha, Set<Usuario> usuarios) {
 		this.id = id;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
@@ -57,7 +59,7 @@ public class Evento implements java.io.Serializable {
 	}
 
 	@Id
-
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
 	public int getId() {
 		return this.id;
@@ -96,11 +98,11 @@ public class Evento implements java.io.Serializable {
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "fecha", nullable = false, length = 13)
-	public Date getFecha() {
+	public LocalDate getFecha() {
 		return this.fecha;
 	}
 
-	public void setFecha(Date fecha) {
+	public void setFecha(LocalDate fecha) {
 		this.fecha = fecha;
 	}
 
