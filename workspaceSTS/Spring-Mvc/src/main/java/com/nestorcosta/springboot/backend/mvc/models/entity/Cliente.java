@@ -11,6 +11,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name="clientes")
@@ -23,8 +26,12 @@ public class Cliente implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)//Le de numeros consecutivos , un auto-numerico
 	private Long id;
 	
+	@NotEmpty(message="El nombre no puede estar vacio")
+	@Size(min=4,max=12, message="El nombre debe contener entre 4 y 12 letras")
 	private String nombre;
 	private String apellido;
+	@NotEmpty(message="El email no puede estar vacio")
+	@Email(message="La direccion de correo no está bien formada")
 	private String email;
 	
 	@Column(name="create_at")
