@@ -37,6 +37,7 @@ public class Evento implements java.io.Serializable {
 	private LocalDate fecha;
 	@JsonIgnore
 	private Set<Usuario> usuarios = new HashSet<Usuario>(0);
+	private String imagen;
 
 	public Evento() {
 	}
@@ -56,6 +57,30 @@ public class Evento implements java.io.Serializable {
 		this.precio = precio;
 		this.fecha = fecha;
 		this.usuarios = usuarios;
+	}
+
+	
+	
+	public Evento(int id, String nombre, String descripcion, BigDecimal precio, LocalDate fecha, Set<Usuario> usuarios,
+			String imagen) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+		this.precio = precio;
+		this.fecha = fecha;
+		this.usuarios = usuarios;
+		this.imagen = imagen;
+	}
+	
+	public Evento(Evento e) {
+		super();
+		this.id = e.id;
+		this.nombre = e.nombre;
+		this.descripcion = e.descripcion;
+		this.precio = e.precio;
+		this.fecha = e.fecha;
+		this.imagen = e.imagen;
 	}
 
 	@Id
@@ -116,6 +141,15 @@ public class Evento implements java.io.Serializable {
 
 	public void setUsuarios(Set<Usuario> usuarios) {
 		this.usuarios = usuarios;
+	}
+	
+
+	public String getImagen() {
+		return imagen;
+	}
+
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
 	}
 
 	@Override

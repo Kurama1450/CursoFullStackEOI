@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.nestorcosta.springboot.backend.eventos.models.dto.EventoDto;
 import com.nestorcosta.springboot.backend.eventos.models.entity.Evento;
@@ -56,7 +57,15 @@ public class EventoRestController {
 		Map<String,Object> response = new HashMap<>();
 		
 		try {
-			respuesta = eventoService.findAll();
+			respuesta = eventoService.findAll()
+					.stream()
+		            .map(e -> {
+		                Evento evento = new Evento(e);
+		                if(evento.getImagen()!=null)
+		                	evento.setImagen(ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString() + "/" + evento.getImagen());
+		                return evento;
+		            })
+		            .collect(Collectors.toList());
 		} catch (DataAccessException e) {  // Error al acceder a la base de datos
 			response.put("mensaje", "Error al conectar con la base de datos");
 			response.put("error", e.getMessage().concat(":")
@@ -91,6 +100,9 @@ public class EventoRestController {
 			response.put("mensaje", "El evento con ID: ".concat(id+"").concat(" no existe"));
 			return new ResponseEntity<Map<String,Object>>(response,HttpStatus.NOT_FOUND);
 		}
+        if(evento.getImagen()!=null) // si el evento tiene imagen
+        	evento.setImagen(ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString() + "/" + evento.getImagen());
+
 		// ha encontrado el cliente
 		return new ResponseEntity<Evento>(evento,HttpStatus.OK);		
 	}
@@ -103,13 +115,19 @@ public class EventoRestController {
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> delete(@PathVariable int id){
+		Evento evento = null;
 		Map<String,Object> response = new HashMap<>();
 		try {
+			evento = eventoService.findById(id);
 			eventoService.delete(id);
 		} catch (DataAccessException e) {  // Error al acceder a la base de datos
 			response.put("mensaje", "Error al eliminar el id");
 			response.put("error", e.getMessage().concat(":")
 					.concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String,Object>>(response,HttpStatus.NOT_FOUND);
+		}
+		if(evento==null) {  // no existe el id de cliente
+			response.put("mensaje", "El evento con ID: ".concat(id+"").concat(" no existe"));
 			return new ResponseEntity<Map<String,Object>>(response,HttpStatus.NOT_FOUND);
 		}
 		response.put("mensaje", "El evento se ha borrado correctamente");
@@ -131,6 +149,8 @@ public class EventoRestController {
 					
 		try {
 			nuevo = eventoService.save(evento);
+			if(evento.getImagen()!=null)
+				nuevo.setImagen(ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString() + "/" + nuevo.getImagen());
 		} catch (DataAccessException e) {  // Error al acceder a la base de datos
 			response.put("mensaje", "Error al conectar con la base de datos");
 			response.put("error", e.getMessage().concat(":")
@@ -181,7 +201,11 @@ public class EventoRestController {
 			eventoActual.setDescripcion(evento.getDescripcion());
 			eventoActual.setPrecio(evento.getPrecio());
 			eventoActual.setFecha(evento.getFecha());
+			if(evento.getImagen()!=null)
+				eventoActual.setImagen(evento.getImagen());
 			eventoUpdated = eventoService.save(eventoActual);
+			if(evento.getImagen()!=null)
+				eventoUpdated.setImagen(ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString() + "/" + eventoUpdated.getImagen());
 		} catch (DataAccessException e) {  // Error al acceder a la base de datos
 			response.put("mensaje", "Error al conectar con la base de datos");
 			response.put("error", e.getMessage().concat(":")

@@ -8,12 +8,15 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.nestorcosta.springboot.backend.eventos.models.dao.IeventoDao;
 import com.nestorcosta.springboot.backend.eventos.models.entity.Evento;
+import com.nestorcosta.springboot.backend.eventos.utilidades.ImageUtils;
 
 @Service
 public class EventoServiceImpl implements IeventoService{
 	
 	@Autowired
 	private IeventoDao eventoDao;
+
+	private final ImageUtils imageUtils = new ImageUtils();
 
 	@Override
 	@Transactional(readOnly=true)
@@ -35,8 +38,12 @@ public class EventoServiceImpl implements IeventoService{
 
 	@Override
 	@Transactional
-	public Evento save(Evento cliente) {
-		return eventoDao.save(cliente);
+	public Evento save(Evento evento) {
+		if(evento.getImagen()!=null) {
+			String ruta = imageUtils.saveImageBase64("eventos", evento.getImagen());
+	        evento.setImagen(ruta);
+		}
+		return eventoDao.save(evento);
 	}
 
 }
