@@ -42,8 +42,10 @@ public class EventoServiceImpl implements IeventoService{
 		if(evento.getImagen()!=null) {  // me envían imagen desde el front
 			String ruta = imageUtils.saveImageBase64("eventos", evento.getImagen());
 			evento.setImagen(ruta);
+		} else {  // Le quita la imagen en la base datos si llega con null
+			evento.setImagen(null);
 		}
-		return eventoDao.save(evento);
+		return eventoDao.save(evento);  // actualización sobre la base de datos
 	}
 
 }

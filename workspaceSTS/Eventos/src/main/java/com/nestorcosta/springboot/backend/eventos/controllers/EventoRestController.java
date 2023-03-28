@@ -198,6 +198,8 @@ public class EventoRestController {
 			eventoActual.setFecha(evento.getFecha());
 			if(evento.getImagen()!=null)  // Me la guarda en bbdd si existe
 				eventoActual.setImagen(evento.getImagen());
+			else
+				eventoActual.setImagen(null);
 			eventoUpdated = eventoService.save(eventoActual);
 			if(evento.getImagen()!=null) {  // Para devolverle al front la ruta completa de la imagen
 				eventoUpdated.setImagen(ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString() + "/" + eventoUpdated.getImagen());
