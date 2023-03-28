@@ -15,7 +15,7 @@ public class EventoServiceImpl implements IeventoService{
 	
 	@Autowired
 	private IeventoDao eventoDao;
-
+	
 	private final ImageUtils imageUtils = new ImageUtils();
 
 	@Override
@@ -39,9 +39,9 @@ public class EventoServiceImpl implements IeventoService{
 	@Override
 	@Transactional
 	public Evento save(Evento evento) {
-		if(evento.getImagen()!=null) {
+		if(evento.getImagen()!=null) {  // me envían imagen desde el front
 			String ruta = imageUtils.saveImageBase64("eventos", evento.getImagen());
-	        evento.setImagen(ruta);
+			evento.setImagen(ruta);
 		}
 		return eventoDao.save(evento);
 	}
