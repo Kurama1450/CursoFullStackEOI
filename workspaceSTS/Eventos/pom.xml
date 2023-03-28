@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.nestorcosta.springboot.backend</groupId>
 	<artifactId>eventos</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>Eventos</name>
 	<description>Proyecto Fin de Curso FullStack</description>
 	<properties>
