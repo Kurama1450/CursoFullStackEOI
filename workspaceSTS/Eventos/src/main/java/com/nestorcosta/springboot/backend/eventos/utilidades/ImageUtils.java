@@ -10,6 +10,9 @@ import java.util.Base64;
 
 import javax.imageio.ImageIO;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class ImageUtils {
 
 	public String saveImageBase64(String dir, String imageB64) {
@@ -31,6 +34,18 @@ public class ImageUtils {
 			System.err.println(e.getMessage());
 			return "";
 		}
+	}
+	
+	public boolean deleteImage(String dir, String nombre) {
+		try {
+			Path path = Paths.get(dir, nombre);
+			Files.deleteIfExists(path);
+			return true;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}		
 	}
 	
 }

@@ -33,12 +33,19 @@ public class EventoServiceImpl implements IeventoService{
 	@Override
 	@Transactional
 	public void delete(int id) {
-		eventoDao.deleteById(id);		
+		Evento eventoActual = eventoDao.findById(id).orElse(null);
+		if(eventoActual!=null) {
+			if(eventoActual.getImagen()!=null) {
+				// borrado del fichero de la imagen
+				imageUtils.deleteImage("public", eventoActual.getImagen());
+			}
+			eventoDao.deleteById(id);
+		}
 	}
 
 	@Override
 	@Transactional
-	public Evento save(Evento evento) {
+	public Evento save(Evento evento) {		
 		if(evento.getImagen()!=null) {  // me envían imagen desde el front
 			String ruta = imageUtils.saveImageBase64("eventos", evento.getImagen());
 			evento.setImagen(ruta);
